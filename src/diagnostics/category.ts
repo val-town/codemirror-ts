@@ -43,3 +43,19 @@ export function isDiagnosticWithLocation(
     typeof diagnostic.length === "number"
   );
 }
+
+/**
+ * Get the message for a diagnostic. TypeScript
+ * is kind of weird: messageText might have the message,
+ * or a pointer to the message. This follows the chain
+ * to get a string, regardless of which case we're in.
+ */
+export function tsDiagnosticMessage(
+  diagnostic: Pick<TSDiagnostic, "messageText">,
+): string {
+  if (typeof diagnostic.messageText === "string") {
+    return diagnostic.messageText;
+  }
+  // TODO: go through linked list
+  return diagnostic.messageText.messageText;
+}
