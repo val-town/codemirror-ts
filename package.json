@@ -1,0 +1,47 @@
+{
+  "name": "codemirror-ts",
+  "version": "1.0.0",
+  "description": "codemirror extensions for typescript",
+  "main": "./dist/commonjs/index.js",
+  "scripts": {
+    "prepare": "tshy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "codemirror",
+    "typescript",
+    "ts"
+  ],
+  "author": "Val Town",
+  "license": "ISC",
+  "devDependencies": {
+    "tshy": "^1.8.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "tshy": {
+    "exports": {
+      "./package.json": "./package.json",
+      ".": "./src/index.ts"
+    }
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/index.d.ts",
+        "default": "./dist/commonjs/index.js"
+      }
+    }
+  },
+  "types": "./dist/commonjs/index.d.ts",
+  "type": "module",
+  "dependencies": {
+    "comlink": "^4.4.1"
+  }
+}

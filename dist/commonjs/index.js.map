@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../src/index.ts"],"names":[],"mappings":";;;AAAa,QAAA,UAAU,GAAG,CAAC,CAAC","sourcesContent":["export const helloWorld = 1;\n"]}
