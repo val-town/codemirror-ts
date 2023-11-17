@@ -36,7 +36,8 @@
   "tshy": {
     "exports": {
       "./package.json": "./package.json",
-      ".": "./src/index.ts"
+      ".": "./src/index.ts",
+      "./worker": "./src/worker.ts"
     }
   },
   "exports": {
