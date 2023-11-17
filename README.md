@@ -10,6 +10,15 @@ in CodeMirror.
 - Autocomplete
 - Diagnostics (lints, in CodeMirror's terminology)
 
+## Peer dependencies
+
+This module does not depend on anything: your project should
+have direct dependencies to:
+
+- `@codemirror/view`
+- `@codemirror/lint`
+- `@codemirror/autocomplete`
+
 ## Using these extensions
 
 _This is designed to scale up to more complex scenarios, so there
