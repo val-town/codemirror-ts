@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.tsSync = void 0;
 const view_1 = require("@codemirror/view");
+const update_js_1 = require("./update.js");
 /**
  * Sync updates from CodeMirror to the TypeScript
  * virtual environment. Note that this updates a file - it isn't
@@ -20,14 +21,7 @@ function tsSync({ env, path, }) {
         if (!update.docChanged && !first)
             return;
         first = false;
-        // In TypeScript, updates are not like PUTs, you
-        // need to create a file before updating it.
-        if (!env.getSourceFile(path)) {
-            env.createFile(path, update.state.doc.toString());
-        }
-        else {
-            env.updateFile(path, update.state.doc.toString());
-        }
+        (0, update_js_1.createOrUpdateFile)(env, path, update.state.doc.toString());
     });
 }
 exports.tsSync = tsSync;

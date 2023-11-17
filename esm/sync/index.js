@@ -1,4 +1,5 @@
 import { EditorView } from "@codemirror/view";
+import { createOrUpdateFile } from "./update.js";
 /**
  * Sync updates from CodeMirror to the TypeScript
  * virtual environment. Note that this updates a file - it isn't
@@ -17,14 +18,7 @@ export function tsSync({ env, path, }) {
         if (!update.docChanged && !first)
             return;
         first = false;
-        // In TypeScript, updates are not like PUTs, you
-        // need to create a file before updating it.
-        if (!env.getSourceFile(path)) {
-            env.createFile(path, update.state.doc.toString());
-        }
-        else {
-            env.updateFile(path, update.state.doc.toString());
-        }
+        createOrUpdateFile(env, path, update.state.doc.toString());
     });
 }
 //# sourceMappingURL=index.js.map

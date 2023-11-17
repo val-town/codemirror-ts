@@ -1,0 +1,1 @@
+{"version":3,"file":"getLints.d.ts","sourceRoot":"","sources":["../../../src/lint/getLints.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,4BAA4B,EAAE,MAAM,iBAAiB,CAAC;AAE/D,wBAAgB,QAAQ,CAAC,EACvB,GAAG,EACH,IAAI,GACL,EAAE;IACD,GAAG,EAAE,4BAA4B,CAAC;IAClC,IAAI,EAAE,MAAM,CAAC;CACd,2CAaA"}

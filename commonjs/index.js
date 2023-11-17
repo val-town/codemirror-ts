@@ -15,7 +15,9 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./sync/index.js"), exports);
+__exportStar(require("./sync/tsSyncWorker.js"), exports);
 __exportStar(require("./autocomplete/index.js"), exports);
 __exportStar(require("./lint/index.js"), exports);
+__exportStar(require("./lint/linterWorker.js"), exports);
 __exportStar(require("./hover/index.js"), exports);
 //# sourceMappingURL=index.js.map
