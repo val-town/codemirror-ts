@@ -7,10 +7,13 @@ import {
   createVirtualTypeScriptEnvironment,
 } from "@typescript/vfs";
 import ts from "typescript";
-import { tsDiagnostics } from "../src/diagnostics/index.js";
-import { tsHover } from "../src/hover/index.js";
-import { tsAutocomplete } from "../src/autocomplete/index.js";
-import { tsSync } from "../src/sync.js";
+import {
+  tsLinter,
+  tsHover,
+  type HoverInfo,
+  tsAutocomplete,
+  tsSync,
+} from "../src/index.js";
 
 const fsMap = await createDefaultMapFromCDN(
   { target: ts.ScriptTarget.ES2022 },
@@ -18,15 +21,20 @@ const fsMap = await createDefaultMapFromCDN(
   true,
   ts,
 );
-
 const system = createSystem(fsMap);
-
 const compilerOpts = {};
 const env = createVirtualTypeScriptEnvironment(system, [], ts, compilerOpts);
 
 const path = "index.ts";
 
 let editor = new EditorView({
+  doc: `let hasAnError: string = 10;
+
+function increment(num: number) {
+  return num + 1;
+}
+
+increment('not a number');`,
   extensions: [
     basicSetup,
     javascript({
@@ -34,16 +42,22 @@ let editor = new EditorView({
       jsx: true,
     }),
     tsSync({ env, path }),
-    tsDiagnostics({ env, path }),
+    tsLinter({ env, path }),
     autocompletion({
       override: [tsAutocomplete({ env, path })],
     }),
     tsHover({
       env,
       path,
-      renderTooltip: (info) => {
+      renderTooltip(info: HoverInfo) {
         const div = document.createElement("div");
-        div.innerText = JSON.stringify(info);
+        if (info.quickInfo) {
+          for (let part of info.quickInfo.displayParts) {
+            const span = div.appendChild(document.createElement("span"));
+            span.className = `quick-info-${part.kind}`;
+            span.innerText = part.text;
+          }
+        }
         return { dom: div };
       },
     }),

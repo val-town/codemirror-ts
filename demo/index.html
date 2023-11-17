@@ -4,12 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>codemirror-ts demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="./demo.css" rel="stylesheet" />
   </head>
   <body>
-    <h1>codemirror-ts demo</h1>
-    <div id="app">
-      <div id="editor"></div>
-    </div>
+    <main>
+      <h1>
+        <a href="https://github.com/val-town/codemirror-ts">codemirror-ts</a>
+      </h1>
+      <p>by <a href="https://www.val.town/">val.town</a></p>
+      <p>
+        codemirror-ts is a set of extensions for
+        <a href="https://codemirror.net/"> CodeMirror 6 </a> that add support
+        for <a href="https://www.typescriptlang.org/">TypeScript</a>.
+      </p>
+      <h2>Currently supported</h2>
+      <ul>
+        <li>Autocomplete</li>
+        <li>Hover</li>
+        <li>Diagnostics</li>
+      </ul>
+      <h2>Demo</h2>
+      <div id="app">
+        <div id="editor"></div>
+      </div>
+    </main>
     <script type="module" src="./index.ts"></script>
   </body>
 </html>

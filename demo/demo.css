@@ -1,0 +1,61 @@
+body {
+  margin: 0;
+  font-family: "IBM Plex Mono", monospace;
+  background: #eee;
+  color: #333;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  margin: 0;
+}
+
+h2 {
+  font-weight: normal;
+  font-size: 18px;
+}
+
+p {
+  line-height: 1.5;
+}
+
+a {
+  color: blue;
+}
+
+a:hover {
+  color: green;
+}
+
+.cm-editor {
+  border: 1px solid #000;
+}
+
+main {
+  max-width: 640px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+  border-left: 1px solid #aaa;
+  border-right: 1px solid #aaa;
+}
+
+.quick-info-punctuation {
+  color: #ccc;
+}
+
+.quick-info-functionName {
+  color: indigo;
+}
+
+.quick-info-keyword {
+  color: blue;
+}
+
+.quick-info-parameterName {
+  color: green;
+}

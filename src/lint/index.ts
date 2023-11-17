@@ -23,7 +23,7 @@ export function getDiagnostics({
   return diagnostics.map(convertTSDiagnosticToCM);
 }
 
-export function tsDiagnostics({
+export function tsLinter({
   env,
   path,
 }: {

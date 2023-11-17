@@ -11,7 +11,7 @@ import { type QuickInfo, type DefinitionInfo } from "typescript";
  * This information is passed to the API consumer to allow
  * them to create tooltips however they wish.
  */
-interface HoverInfo {
+export interface HoverInfo {
   start: number;
   end: number;
   typeDef: readonly DefinitionInfo[] | undefined;
