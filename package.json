@@ -5,7 +5,8 @@
   "main": "./dist/commonjs/index.js",
   "scripts": {
     "prepare": "tshy",
-    "dev": "vite"
+    "dev": "vite",
+    "build": "vite build"
   },
   "keywords": [
     "codemirror",
