@@ -46,6 +46,7 @@
   "type": "module",
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.1",
+    "@codemirror/lint": "^6.4.2",
     "codemirror": "^6.0.1",
     "comlink": "^4.4.1"
   }

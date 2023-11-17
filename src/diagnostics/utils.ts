@@ -59,3 +59,22 @@ export function tsDiagnosticMessage(
   // TODO: go through linked list
   return diagnostic.messageText.messageText;
 }
+
+/**
+ * TypeScript and CodeMirror have slightly different
+ * ways of representing diagnostics. This converts
+ * from one to the other.
+ */
+export function convertTSDiagnosticToCM(d: DiagnosticWithLocation): Diagnostic {
+  // We add some code at the end of the document, but we can't have a
+  // diagnostic in an invalid range
+  const start = d.start;
+  const message = tsDiagnosticMessage(d);
+
+  return {
+    from: start,
+    to: start + d.length,
+    message: message,
+    severity: tsCategoryToSeverity(d),
+  };
+}
