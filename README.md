@@ -110,7 +110,7 @@ CodeMirror's linter method yourself._
 ### Autocompletion
 
 To make it possible to combine different autocompletion
-sources, we expose a [`CompletionSource`]((https://codemirror.net/docs/ref/#autocomplete.autocompletion) which you can use with the CodeMirror `autocomplete` method:
+sources, we expose a [`CompletionSource`](https://codemirror.net/docs/ref/#autocomplete.autocompletion) which you can use with the CodeMirror `autocomplete` method:
 
 ```ts
 autocompletion({
