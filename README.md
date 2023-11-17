@@ -3,6 +3,7 @@
 On npm as `@valtown/codemirror-ts`
 
 - [Demo on StackBlitz](https://stackblitz.com/edit/vitejs-vite-giwkc3?file=index.html)
+- [Demo on StackBlitz using Web Workers](https://stackblitz.com/edit/vitejs-vite-qsncw4?file=src%2Fmain.ts)
 
 TypeScript extensions for CodeMirror. This aims to support
 as much of the basic interactions with TypeScript code as possible
@@ -211,7 +212,7 @@ Now, on the application side (in the code in which you're initializing CodeMirro
 you'll need to import and initialize the worker:
 
 ```ts
-import { WorkerShape } from "@valtown/codemirror-ts/worker";
+import { type WorkerShape } from "@valtown/codemirror-ts/worker";
 import * as Comlink from "comlink";
 
 const innerWorker = new Worker(new URL("./worker.ts", import.meta.url), {
@@ -267,6 +268,6 @@ These extensions expect your client-side CodeMirror instance to be attached
 to a filename, like `index.ts`. By sharing a TypeScript environment,
 this lets you have two CodeMirror instances, say, editing `a.ts` and `b.ts`,
 and for one to import values from the other and get the correct types -
-because TypeScript will automatically include both.
+because TypeScript automatically include both.
 
 Note, however: these extensions currently _only support creating and updating files_ - if you support removing or deleting files, they won't be possible to do that. It would be really nice to support those other parts of the lifecycle - PRs gladly accepted!
