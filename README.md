@@ -24,6 +24,11 @@ have direct dependencies to:
 - `@codemirror/lint`
 - `@codemirror/autocomplete`
 
+## Setup
+
+Below are recipes for setting up this code - check out the StackBlitz
+demos above if you want easily copy-paste-able code!
+
 ## Setup (main thread)
 
 This is the simplest way to use this code: you'll be running
