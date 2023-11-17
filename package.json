@@ -16,6 +16,7 @@
   "author": "Val Town",
   "license": "ISC",
   "devDependencies": {
+    "@typescript/vfs": "^1.5.0",
     "tshy": "^1.8.0",
     "vite": "^4.5.0"
   },
