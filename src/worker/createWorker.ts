@@ -6,8 +6,26 @@ import { getAutocompletion } from "../autocomplete/getAutocompletion.js";
 import { getHover } from "../hover/getHover.js";
 import { type Remote } from "comlink";
 
+/**
+ * The shape of the output of something like
+ *
+ * ```ts
+ * Comlink.wrap(new Worker(…));
+ * ```
+ *
+ * Most TypeScript environments won’t be able to figure out
+ * the types of a `Worker` instance, so this is a helper
+ * for casting.
+ */
 export type WorkerShape = Remote<ReturnType<typeof createWorker>>;
 
+/**
+ * Create a worker with `WorkerShape`, given an initializer
+ * method. You might want to customize how your TypeScript
+ * environment is set up, so the initializer can do all
+ * of that: this then gives you an object that can be
+ * passed to `Comlink.expose`.
+ */
 export function createWorker(
   initializer: () =>
     | VirtualTypeScriptEnvironment
