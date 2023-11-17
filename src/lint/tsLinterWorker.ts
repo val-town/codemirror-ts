@@ -1,13 +1,11 @@
 import { linter, Diagnostic } from "@codemirror/lint";
-import * as Comlink from "comlink";
+import { type WorkerShape } from "../worker.js";
 
 export function tsLinterWorker({
   worker,
   path,
 }: {
-  worker: Comlink.Remote<{
-    getLints: ({ path }: { path: string }) => Diagnostic[];
-  }>;
+  worker: WorkerShape;
   path: string;
 }) {
   return linter(async (_view): Promise<readonly Diagnostic[]> => {

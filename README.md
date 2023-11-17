@@ -23,7 +23,13 @@ have direct dependencies to:
 - `@codemirror/lint`
 - `@codemirror/autocomplete`
 
-## Using these extensions
+## Setup (main thread)
+
+This is the simplest way to use this code: you'll be running
+the TypeScript server on the same processing as the rest of the web
+application. To run the TypeScript server in a worker (which can yield
+performance benefits, at the cost of complexity), see the next
+section.
 
 _This is designed to scale up to more complex scenarios, so there
 is some assembly required. We could encapsulate more, but that would
@@ -149,6 +155,87 @@ tsHover({
 });
 ```
 
-## Roadmap
+## Setup (worker)
 
-- [ ] Support for a TypeScript environment in a WebWorker
+Using a [Worker](https://developer.mozilla.org/en-US/docs/Web/API/Worker), you can
+run TypeScript separately from the rest of your JavaScript, which can make
+both faster and more reliable. Depending on how you're building applications,
+you'll need to consult their documentation on setting up web workers:
+
+- [Using workers with Vite](https://vitejs.dev/guide/features#web-workers)
+- With Next.js, you'll need to make sure that you're [using Webpack 5](https://nextjs.org/docs/messages/webpack5)
+- With Remix, you'll need [a separate entry point](https://github.com/remix-run/remix/discussions/4416?sort=new) (or it may work automatically if you've switched to using Vite with Remix)
+
+With that out of the way:
+
+1. Create your worker
+
+In a file like `worker.ts`, you'll need something like this:
+
+```ts
+import {
+  createDefaultMapFromCDN,
+  createSystem,
+  createVirtualTypeScriptEnvironment,
+} from "@typescript/vfs";
+import ts from "typescript";
+import * as Comlink from "comlink";
+import { createWorker } from "@valtown/codemirror-ts/worker";
+
+Comlink.expose(
+  createWorker(async function () {
+    const fsMap = await createDefaultMapFromCDN(
+      { target: ts.ScriptTarget.ES2022 },
+      "3.7.3",
+      false,
+      ts,
+    );
+    const system = createSystem(fsMap);
+    const compilerOpts = {};
+    return createVirtualTypeScriptEnvironment(system, [], ts, compilerOpts);
+  }),
+);
+```
+
+This code should look familiar if you read the section about setting this up
+with the main thread: it's the same setting-up of the TypeScript environment,
+but this time wrapping it in `Comlink.expose`, and, importantly, setting
+the third parameter of `createDefaultMapFromCDN` to false.
+
+The third option is whether to cache files: it uses `localStorage` to power
+that cache, and Web Workers don't support `localStorage`.
+
+2. Initialize the worker
+
+Now, on the application side (in the code in which you're initializing CodeMirror),
+you'll need to import and initialize the worker:
+
+```ts
+import { WorkerShape } from "@valtown/codemirror-ts/worker";
+import * as Comlink from "comlink";
+
+const innerWorker = new Worker(new URL("./worker.ts", import.meta.url), {
+  type: "module",
+});
+const worker = Comlink.wrap(innerWorker) as WorkerShape;
+await worker.initialize();
+```
+
+3. Add extensions
+
+In short, there are `*`Worker versions of each of the extension
+that accept the `worker` instead of `env` as an argument.
+
+```ts
+[
+  tsSyncWorker({ worker, path }),
+  tsLinterWorker({ worker, path }),
+  autocompletion({
+    override: [tsAutocompleteWorker({ worker, path })],
+  }),
+  tsHoverWorker({
+    worker,
+    path,
+  }),
+];
+```

@@ -18,8 +18,8 @@ import {
   tsSyncWorker,
 } from "../src/index.js";
 import * as Comlink from "comlink";
+import { WorkerShape } from "../src/worker.js";
 
-/*
 (async () => {
   const fsMap = await createDefaultMapFromCDN(
     { target: ts.ScriptTarget.ES2022 },
@@ -60,7 +60,6 @@ increment('not a number');`,
     parent: document.querySelector("#editor")!,
   });
 })();
-*/
 
 (async () => {
   const path = "index.ts";
@@ -69,7 +68,7 @@ increment('not a number');`,
   const innerWorker = new Worker(new URL("./worker.ts", import.meta.url), {
     type: "module",
   });
-  const worker = Comlink.wrap(innerWorker);
+  const worker = Comlink.wrap(innerWorker) as WorkerShape;
   await worker.initialize();
 
   let editor = new EditorView({
@@ -96,6 +95,6 @@ increment('not a number');`,
         path,
       }),
     ],
-    parent: document.querySelector("#editor")!,
+    parent: document.querySelector("#editor-worker")!,
   });
 })().catch((e) => console.error(e));

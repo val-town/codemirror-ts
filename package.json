@@ -52,8 +52,5 @@
     }
   },
   "types": "./dist/commonjs/index.d.ts",
-  "type": "module",
-  "dependencies": {
-    "comlink": "^4.4.1"
-  }
+  "type": "module"
 }
