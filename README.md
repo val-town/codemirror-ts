@@ -1,5 +1,7 @@
 # codemirror-ts
 
+_[Made by val.town](https://www.val.town/), a social website to write and deploy backend services._
+
 On npm as `@valtown/codemirror-ts`
 
 - [Demo on StackBlitz](https://stackblitz.com/edit/vitejs-vite-giwkc3?file=index.html)
