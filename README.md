@@ -271,3 +271,19 @@ and for one to import values from the other and get the correct types -
 because TypeScript automatically include both.
 
 Note, however: these extensions currently _only support creating and updating files_ - if you support removing or deleting files, they won't be possible to do that. It would be really nice to support those other parts of the lifecycle - PRs gladly accepted!
+
+## Conceptual notes: Comlink
+
+This uses [Comlink](https://github.com/GoogleChromeLabs/comlink) as an
+abstraction for the WebWorker. There are certainly other ways to build it -
+we could write our own similar abstraction. But, Comlink is a pretty nifty
+way to use Web Workers - it allows you to call functions in a web worker
+from the top page.
+
+Like any other communication across `postMessage`, there are limits
+on the kinds of values you can pass. So we can't pass the raw `CompletionContext` object
+across the boundary. Right now this module works around that limitation
+by just passing the properties we need. There may be other solutions
+in the future.
+
+Comlink is [lightweight](https://bundlephobia.com/package/comlink@4.4.1) (4.7kb gzipped).
