@@ -6,6 +6,7 @@
   "scripts": {
     "prepare": "tshy",
     "dev": "vite",
+    "tsc": "tsc --noEmit",
     "build": "vite build"
   },
   "keywords": [
@@ -25,6 +26,7 @@
     "@typescript/vfs": "^1.5.0",
     "codemirror": "^6",
     "tshy": "^1.8.0",
+    "typescript": "^5.2.2",
     "vite": "^4.5.0"
   },
   "files": [
@@ -50,5 +52,8 @@
     }
   },
   "types": "./dist/commonjs/index.d.ts",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "comlink": "^4.4.1"
+  }
 }

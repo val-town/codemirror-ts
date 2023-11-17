@@ -1,18 +1,18 @@
-import { VirtualTypeScriptEnvironment } from "@typescript/vfs";
 import { EditorView } from "@codemirror/view";
-import { createOrUpdateFile } from "./update.js";
+import * as Comlink from "comlink";
+
+type WorkerShape = Comlink.Remote<{
+  updateFile({ path, code }: { path: string; code: string }): void;
+}>;
 
 /**
- * Sync updates from CodeMirror to the TypeScript
- * virtual environment. Note that this updates a file - it isn't
- * responsible (yet) for deleting or renaming files if they
- * do get deleted or renamed.
+ * Sync updates from CodeMirror to the worker.
  */
-export function tsSync({
-  env,
+export function tsSyncWorker({
+  worker,
   path,
 }: {
-  env: VirtualTypeScriptEnvironment;
+  worker: WorkerShape;
   path: string;
 }) {
   // TODO: this is a weak solution to the cold start problem.
@@ -25,6 +25,7 @@ export function tsSync({
   return EditorView.updateListener.of((update) => {
     if (!update.docChanged && !first) return;
     first = false;
-    createOrUpdateFile(env, path, update.state.doc.toString());
+
+    worker.updateFile({ path, code: update.state.doc.toString() });
   });
 }
