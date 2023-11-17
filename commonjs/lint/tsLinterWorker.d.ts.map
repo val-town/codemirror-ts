@@ -1,0 +1,1 @@
+{"version":3,"file":"tsLinterWorker.d.ts","sourceRoot":"","sources":["../../../src/lint/tsLinterWorker.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,KAAK,WAAW,EAAE,MAAM,cAAc,CAAC;AAEhD,wBAAgB,cAAc,CAAC,EAC7B,MAAM,EACN,IAAI,GACL,EAAE;IACD,MAAM,EAAE,WAAW,CAAC;IACpB,IAAI,EAAE,MAAM,CAAC;CACd,yCAIA"}

@@ -8,16 +8,4 @@ export function tsAutocomplete({ path, env, }) {
         });
     };
 }
-export function tsAutocompleteWorker({ path, worker, }) {
-    return async (context) => {
-        return worker.getAutocompletion({
-            path,
-            // Reduce this object so that it's serializable.
-            context: {
-                pos: context.pos,
-                explicit: context.explicit,
-            },
-        });
-    };
-}
 //# sourceMappingURL=index.js.map

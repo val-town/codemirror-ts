@@ -1,7 +1,12 @@
-export * from "./sync/index.js";
+export * from "./sync/tsSync.js";
 export * from "./sync/tsSyncWorker.js";
-export * from "./autocomplete/index.js";
-export * from "./lint/index.js";
-export * from "./lint/linterWorker.js";
-export * from "./hover/index.js";
+export * from "./autocomplete/tsAutocomplete.js";
+export * from "./autocomplete/tsAutocompleteWorker.js";
+export * from "./autocomplete/getAutocompletion.js";
+export * from "./lint/tsLinter.js";
+export * from "./lint/tsLinterWorker.js";
+export * from "./lint/getLints.js";
+export * from "./hover/tsHover.js";
+export * from "./hover/tsHoverWorker.js";
+export * from "./hover/getHover.js";
 //# sourceMappingURL=index.js.map

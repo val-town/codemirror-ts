@@ -14,10 +14,15 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./sync/index.js"), exports);
+__exportStar(require("./sync/tsSync.js"), exports);
 __exportStar(require("./sync/tsSyncWorker.js"), exports);
-__exportStar(require("./autocomplete/index.js"), exports);
-__exportStar(require("./lint/index.js"), exports);
-__exportStar(require("./lint/linterWorker.js"), exports);
-__exportStar(require("./hover/index.js"), exports);
+__exportStar(require("./autocomplete/tsAutocomplete.js"), exports);
+__exportStar(require("./autocomplete/tsAutocompleteWorker.js"), exports);
+__exportStar(require("./autocomplete/getAutocompletion.js"), exports);
+__exportStar(require("./lint/tsLinter.js"), exports);
+__exportStar(require("./lint/tsLinterWorker.js"), exports);
+__exportStar(require("./lint/getLints.js"), exports);
+__exportStar(require("./hover/tsHover.js"), exports);
+__exportStar(require("./hover/tsHoverWorker.js"), exports);
+__exportStar(require("./hover/getHover.js"), exports);
 //# sourceMappingURL=index.js.map

@@ -1,0 +1,1 @@
+{"version":3,"file":"renderTooltip.d.ts","sourceRoot":"","sources":["../../../src/hover/renderTooltip.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,UAAU,EAAE,WAAW,EAAE,MAAM,kBAAkB,CAAC;AAC3D,OAAO,EAAE,SAAS,EAAE,MAAM,eAAe,CAAC;AAE1C,MAAM,MAAM,eAAe,GAAG,CAC5B,IAAI,EAAE,SAAS,EACf,UAAU,EAAE,UAAU,KACnB,WAAW,CAAC;AAEjB,eAAO,MAAM,eAAe,EAAE,eAU7B,CAAC"}
