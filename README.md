@@ -1,5 +1,9 @@
 # codemirror-ts
 
+On npm as `@valtown/codemirror-ts`
+
+- [Demo on StackBlitz](https://stackblitz.com/edit/vitejs-vite-giwkc3?file=index.html)
+
 TypeScript extensions for CodeMirror. This aims to support
 as much of the basic interactions with TypeScript code as possible
 in CodeMirror.
