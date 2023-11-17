@@ -1,5 +1,5 @@
 {
-  "name": "codemirror-ts",
+  "name": "@val-town/codemirror-ts",
   "version": "1.0.0",
   "description": "codemirror extensions for typescript",
   "main": "./dist/commonjs/index.js",
