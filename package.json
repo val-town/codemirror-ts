@@ -51,6 +51,16 @@
         "types": "./dist/commonjs/index.d.ts",
         "default": "./dist/commonjs/index.js"
       }
+    },
+    "./worker": {
+      "import": {
+        "types": "./dist/esm/worker.d.ts",
+        "default": "./dist/esm/worker.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/worker.d.ts",
+        "default": "./dist/commonjs/worker.js"
+      }
     }
   },
   "types": "./dist/commonjs/index.d.ts",

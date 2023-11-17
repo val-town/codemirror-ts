@@ -239,3 +239,34 @@ that accept the `worker` instead of `env` as an argument.
   }),
 ];
 ```
+
+## Conceptual notes: persisted code
+
+There are a few different approaches to building CodeMirror + TypeScript
+integrations. Each of the things that this does - linting, hovering,
+autocompleting - they all require TypeScript to know about your source
+code. It's tempting to send it over all the time: you get your whole
+source code and call something like
+
+```ts
+lint(sourceCode);
+```
+
+However, this has an overhead, and it combines poorly: if you're linting,
+and hovering, and autocompleting, it's inefficient to send the whole code
+over for each of those. Hence how these extensions start with the _sync_
+method, which updates TypeScript's version of the code contents.
+
+This has some drawbacks: maybe the version gets out of sync, especially
+when the TypeScript environment is in a worker. But we think it's worth
+it, and it yields some other benefits.
+
+## Conceptual notes: file names
+
+These extensions expect your client-side CodeMirror instance to be attached
+to a filename, like `index.ts`. By sharing a TypeScript environment,
+this lets you have two CodeMirror instances, say, editing `a.ts` and `b.ts`,
+and for one to import values from the other and get the correct types -
+because TypeScript will automatically include both.
+
+Note, however: these extensions currently _only support creating and updating files_ - if you support removing or deleting files, they won't be possible to do that. It would be really nice to support those other parts of the lifecycle - PRs gladly accepted!
