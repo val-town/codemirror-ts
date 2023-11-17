@@ -1,1 +1,0 @@
-{"version":3,"file":"tsHover.d.ts","sourceRoot":"","sources":["../../../src/hover/tsHover.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,KAAK,4BAA4B,EAAE,MAAM,iBAAiB,CAAC;AAEpE,OAAO,EAAmB,eAAe,EAAE,MAAM,oBAAoB,CAAC;AAEtE,wBAAgB,OAAO,CAAC,EACtB,GAAG,EACH,IAAI,EACJ,aAA+B,GAChC,EAAE;IACD,GAAG,EAAE,4BAA4B,CAAC;IAClC,IAAI,EAAE,MAAM,CAAC;IACb,aAAa,CAAC,EAAE,eAAe,CAAC;CACjC,yCAgBA"}

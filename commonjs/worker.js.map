@@ -1,1 +1,0 @@
-{"version":3,"file":"worker.js","sourceRoot":"","sources":["../../src/worker.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;AAAA,sDAAoC;AACpC,sEAAoD;AACpD,qDAAmC;AACnC,2DAAyC","sourcesContent":["export * from \"./hover/getHover.js\";\nexport * from \"./autocomplete/getAutocompletion.js\";\nexport * from \"./lint/getLints.js\";\nexport * from \"./worker/createWorker.js\";\n"]}
