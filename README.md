@@ -90,7 +90,7 @@ let editor = new EditorView({
 });
 ```
 
-## Linting
+### Linting
 
 The `tsLinter` extension can be initialized
 like this and added to the `extensions` array in the setup
@@ -107,7 +107,7 @@ _If you want to modify how lints are handled, you can use
 the `getLints({ env, path })` method and wire it up with
 CodeMirror's linter method yourself._
 
-## Autocompletion
+### Autocompletion
 
 To make it possible to combine different autocompletion
 sources, we expose a [`CompletionSource`]((https://codemirror.net/docs/ref/#autocomplete.autocompletion) which you can use with the CodeMirror `autocomplete` method:
@@ -122,7 +122,7 @@ _We expose a lower-level interface to autocompletions with the
 `getAutocompletion({ env, path, context })` method that takes
 a `CompletionContext` parameter._
 
-## Hover
+### Hover
 
 The hover definition can be used like the following:
 
