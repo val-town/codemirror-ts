@@ -2,4 +2,5 @@
 export default {
   root: "demo",
   outDir: "build",
+  base: "/codemirror-ts/",
 };
