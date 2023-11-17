@@ -2,7 +2,7 @@ import { linter, Diagnostic } from "@codemirror/lint";
 import { VirtualTypeScriptEnvironment } from "@typescript/vfs";
 import { convertTSDiagnosticToCM, isDiagnosticWithLocation } from "./utils.js";
 
-export function getDiagnostics({
+export function getLints({
   env,
   path,
 }: {
@@ -31,7 +31,7 @@ export function tsLinter({
   path: string;
 }) {
   return linter(async (view): Promise<readonly Diagnostic[]> => {
-    return getDiagnostics({
+    return getLints({
       env,
       path,
     });

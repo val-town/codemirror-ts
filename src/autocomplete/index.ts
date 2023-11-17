@@ -14,14 +14,13 @@ const TS_COMPLETE_BLOCKLIST: ScriptElementKind[] = [ScriptElementKind.warning];
 export async function getAutocompletion({
   env,
   path,
-  pos,
-  explicit,
+  context,
 }: {
   env: VirtualTypeScriptEnvironment;
   path: string;
-  pos: number;
-  explicit: boolean;
+  context: CompletionContext;
 }): Promise<CompletionResult | null> {
+  const { pos, explicit } = context;
   const rawContents = env.getSourceFile(path)?.getFullText();
 
   if (!rawContents) return null;
@@ -90,8 +89,7 @@ export function tsAutocomplete({
     return getAutocompletion({
       env,
       path,
-      explicit: context.explicit,
-      pos: context.pos,
+      context,
     });
   };
 }

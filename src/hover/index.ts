@@ -52,14 +52,26 @@ export type TooltipRenderer = (
   editorView: EditorView,
 ) => TooltipView;
 
+const defaultRenderer: TooltipRenderer = (info: HoverInfo) => {
+  const div = document.createElement("div");
+  if (info.quickInfo?.displayParts) {
+    for (let part of info.quickInfo.displayParts) {
+      const span = div.appendChild(document.createElement("span"));
+      span.className = `quick-info-${part.kind}`;
+      span.innerText = part.text;
+    }
+  }
+  return { dom: div };
+};
+
 export function tsHover({
   env,
   path,
-  renderTooltip,
+  renderTooltip = defaultRenderer,
 }: {
   env: VirtualTypeScriptEnvironment;
   path: string;
-  renderTooltip: TooltipRenderer;
+  renderTooltip?: TooltipRenderer;
 }) {
   return hoverTooltip(async (view, pos): Promise<Tooltip | null> => {
     const hoverData = await getHover({

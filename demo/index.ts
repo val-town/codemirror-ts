@@ -49,17 +49,6 @@ increment('not a number');`,
     tsHover({
       env,
       path,
-      renderTooltip(info: HoverInfo) {
-        const div = document.createElement("div");
-        if (info.quickInfo) {
-          for (let part of info.quickInfo.displayParts) {
-            const span = div.appendChild(document.createElement("span"));
-            span.className = `quick-info-${part.kind}`;
-            span.innerText = part.text;
-          }
-        }
-        return { dom: div };
-      },
     }),
   ],
   parent: document.querySelector("#editor")!,
