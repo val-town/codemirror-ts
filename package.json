@@ -8,6 +8,7 @@
     "dev": "vite",
     "tsc": "tsc --noEmit",
     "test": "vitest",
+    "test:ci": "vitest run",
     "build": "vite build"
   },
   "keywords": [
