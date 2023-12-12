@@ -294,3 +294,8 @@ by just passing the properties we need. There may be other solutions
 in the future.
 
 Comlink is [lightweight](https://bundlephobia.com/package/comlink@4.4.1) (4.7kb gzipped).
+
+### ❤️ Other great CodeMirror plugins
+
+- [codemirror-vim](https://github.com/replit/codemirror-vim)
+- [codemirror-copilot](https://github.com/asadm/codemirror-copilot)
