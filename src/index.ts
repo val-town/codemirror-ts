@@ -12,3 +12,5 @@ export * from "./lint/getLints.js";
 export * from "./hover/tsHover.js";
 export * from "./hover/tsHoverWorker.js";
 export * from "./hover/getHover.js";
+
+export * from "./references/highlightReferences.js";

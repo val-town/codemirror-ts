@@ -16,6 +16,7 @@ import {
   tsAutocompleteWorker,
   tsSync,
   tsSyncWorker,
+  tsHighlightReferences,
 } from "../src/index.js";
 import * as Comlink from "comlink";
 import { WorkerShape } from "../src/worker.js";
@@ -94,6 +95,7 @@ increment('not a number');`,
         worker,
         path,
       }),
+      tsHighlightReferences,
     ],
     parent: document.querySelector("#editor-worker")!,
   });
