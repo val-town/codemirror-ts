@@ -1,5 +1,5 @@
 import { combineConfig, Facet } from "@codemirror/state";
-import { VirtualTypeScriptEnvironment } from "@typescript/vfs";
+import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
 
 export const tsFacet = Facet.define<
   {
