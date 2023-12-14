@@ -3,24 +3,20 @@ import type {
   CompletionContext,
   CompletionSource,
 } from "@codemirror/autocomplete";
-import { type WorkerShape } from "../worker.js";
+import { tsFacetWorker } from "../index.js";
 
 /**
  * Create a `CompletionSource` that queries
  * the TypeScript environment in a web worker.
  */
-export function tsAutocompleteWorker({
-  path,
-  worker,
-}: {
-  path: string;
-  worker: WorkerShape;
-}): CompletionSource {
+export function tsAutocompleteWorker(): CompletionSource {
   return async (
     context: CompletionContext,
   ): Promise<CompletionResult | null> => {
-    return worker.getAutocompletion({
-      path,
+    const config = context.state.facet(tsFacetWorker);
+    if (!config) return null;
+    return config.worker.getAutocompletion({
+      path: config.path,
       // Reduce this object so that it's serializable.
       context: {
         pos: context.pos,

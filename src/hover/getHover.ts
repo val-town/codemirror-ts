@@ -1,5 +1,5 @@
 import { type QuickInfo, type DefinitionInfo } from "typescript";
-import { VirtualTypeScriptEnvironment } from "@typescript/vfs";
+import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
 
 /**
  * This information is passed to the API consumer to allow

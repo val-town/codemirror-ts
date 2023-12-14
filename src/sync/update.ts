@@ -1,4 +1,4 @@
-import { VirtualTypeScriptEnvironment } from "@typescript/vfs";
+import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
 
 /**
  * In TypeScript, updates are not like PUTs, you

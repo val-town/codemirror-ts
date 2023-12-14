@@ -16,6 +16,8 @@ import {
   tsAutocompleteWorker,
   tsSync,
   tsSyncWorker,
+  tsFacet,
+  tsFacetWorker,
 } from "../src/index.js";
 import * as Comlink from "comlink";
 import { WorkerShape } from "../src/worker.js";
@@ -47,15 +49,13 @@ increment('not a number');`,
         typescript: true,
         jsx: true,
       }),
-      tsSync({ env, path }),
-      tsLinter({ env, path }),
+      tsFacet.of({ env, path }),
+      tsSync(),
+      tsLinter(),
       autocompletion({
-        override: [tsAutocomplete({ env, path })],
+        override: [tsAutocomplete()],
       }),
-      tsHover({
-        env,
-        path,
-      }),
+      tsHover(),
     ],
     parent: document.querySelector("#editor")!,
   });
@@ -85,15 +85,13 @@ increment('not a number');`,
         typescript: true,
         jsx: true,
       }),
-      tsSyncWorker({ worker, path }),
-      tsLinterWorker({ worker, path }),
+      tsFacetWorker.of({ worker, path }),
+      tsSyncWorker(),
+      tsLinterWorker(),
       autocompletion({
-        override: [tsAutocompleteWorker({ worker, path })],
+        override: [tsAutocompleteWorker()],
       }),
-      tsHoverWorker({
-        worker,
-        path,
-      }),
+      tsHoverWorker(),
     ],
     parent: document.querySelector("#editor-worker")!,
   });

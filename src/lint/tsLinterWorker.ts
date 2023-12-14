@@ -1,14 +1,9 @@
 import { linter, Diagnostic } from "@codemirror/lint";
-import { type WorkerShape } from "../worker.js";
+import { tsFacetWorker } from "../index.js";
 
-export function tsLinterWorker({
-  worker,
-  path,
-}: {
-  worker: WorkerShape;
-  path: string;
-}) {
-  return linter(async (_view): Promise<readonly Diagnostic[]> => {
-    return worker.getLints({ path });
+export function tsLinterWorker() {
+  return linter(async (view): Promise<readonly Diagnostic[]> => {
+    const config = view.state.facet(tsFacetWorker);
+    return config ? config.worker.getLints({ path: config.path }) : [];
   });
 }

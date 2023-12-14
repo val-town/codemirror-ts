@@ -1,4 +1,4 @@
-import { VirtualTypeScriptEnvironment } from "@typescript/vfs";
+import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
 import { createOrUpdateFile } from "../sync/update.js";
 import { getLints } from "../lint/getLints.js";
 import { type CompletionContext } from "@codemirror/autocomplete";

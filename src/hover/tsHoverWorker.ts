@@ -1,19 +1,17 @@
 import { hoverTooltip, Tooltip } from "@codemirror/view";
-import { type WorkerShape } from "../worker.js";
 import { defaultRenderer, type TooltipRenderer } from "./renderTooltip.js";
+import { tsFacetWorker } from "../index.js";
 
 export function tsHoverWorker({
-  worker,
-  path,
   renderTooltip = defaultRenderer,
 }: {
-  worker: WorkerShape;
-  path: string;
   renderTooltip?: TooltipRenderer;
-}) {
+} = {}) {
   return hoverTooltip(async (view, pos): Promise<Tooltip | null> => {
-    const hoverData = await worker.getHover({
-      path,
+    const config = view.state.facet(tsFacetWorker);
+    if (!config) return null;
+    const hoverData = await config.worker.getHover({
+      path: config.path,
       pos,
     });
 

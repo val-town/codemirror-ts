@@ -1,18 +1,10 @@
 import { linter, Diagnostic } from "@codemirror/lint";
-import { VirtualTypeScriptEnvironment } from "@typescript/vfs";
 import { getLints } from "./getLints.js";
+import { tsFacet } from "../facet/tsFacet.js";
 
-export function tsLinter({
-  env,
-  path,
-}: {
-  env: VirtualTypeScriptEnvironment;
-  path: string;
-}) {
+export function tsLinter() {
   return linter(async (view): Promise<readonly Diagnostic[]> => {
-    return getLints({
-      env,
-      path,
-    });
+    const config = view.state.facet(tsFacet);
+    return config ? getLints(config) : [];
   });
 }
