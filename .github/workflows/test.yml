@@ -20,4 +20,4 @@ jobs:
       - name: tsc
         run: npm run tsc
       - name: test
-        run: npm run test:ci
+        run: npm run test
