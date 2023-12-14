@@ -67,5 +67,8 @@
     }
   },
   "types": "./dist/commonjs/index.d.ts",
-  "type": "module"
+  "type": "module",
+  "engines": {
+    "node": "*"
+  }
 }
