@@ -67,10 +67,13 @@ const compilerOpts = {};
 const env = createVirtualTypeScriptEnvironment(system, [], ts, compilerOpts);
 ```
 
-2. Install the sync extension:
+2. Install the facet and the sync extension:
 
-This extension powers the rest: when you make changes in your
-editor, this mirrors them to the TypeScript environment using
+The facet configures the rest of the extensions
+with the right path and environment.
+
+When you make changes in your
+editor, the sync extension mirrors them to the TypeScript environment using
 `createFile` and `updateFile` in the TypeScript compiler.
 
 _Note, also, that we're supplying a path._ These extensions
@@ -81,7 +84,7 @@ as well as the `env` parameter which should be your TypeScript
 environment.
 
 ```ts
-import { tsSync } from "@valtown/codemirror-ts";
+import { tsSync, tsFacet } from "@valtown/codemirror-ts";
 
 let env = "index.ts";
 
@@ -92,7 +95,8 @@ let editor = new EditorView({
       typescript: true,
       jsx: true,
     }),
-    tsSync({ env, path }),
+    tsFacet.of({ env, path }),
+    tsSync(),
   ],
   parent: document.querySelector("#editor"),
 });
@@ -105,7 +109,7 @@ like this and added to the `extensions` array in the setup
 of your CodeMirror instance.
 
 ```ts
-tsLinter({ env, path });
+tsLinter();
 ```
 
 This uses the [@codemirror/lint](https://codemirror.net/docs/ref/#lint)
@@ -122,7 +126,7 @@ sources, we expose a [`CompletionSource`](https://codemirror.net/docs/ref/#autoc
 
 ```ts
 autocompletion({
-  override: [tsAutocomplete({ env, path })],
+  override: [tsAutocomplete()],
 });
 ```
 
@@ -135,10 +139,7 @@ a `CompletionContext` parameter._
 The hover definition can be used like the following:
 
 ```ts
-tsHover({
-  env,
-  path,
-});
+tsHover();
 ```
 
 Which automatically uses a default renderer. However, you can
@@ -147,8 +148,6 @@ to render custom UI if you want to, using the `renderTooltip` option.
 
 ```ts
 tsHover({
-  env,
-  path,
   renderTooltip: (info: HoverInfo) => {
     const div = document.createElement("div");
     if (info.quickInfo?.displayParts) {
@@ -236,15 +235,13 @@ that accept the `worker` instead of `env` as an argument.
 
 ```ts
 [
-  tsSyncWorker({ worker, path }),
-  tsLinterWorker({ worker, path }),
+  tsFacetWorker.of({ worker, path }),
+  tsSyncWorker(),
+  tsLinterWorker(),
   autocompletion({
-    override: [tsAutocompleteWorker({ worker, path })],
+    override: [tsAutocompleteWorker()],
   }),
-  tsHoverWorker({
-    worker,
-    path,
-  }),
+  tsHoverWorker(),
 ];
 ```
 
