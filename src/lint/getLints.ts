@@ -1,5 +1,5 @@
 import { convertTSDiagnosticToCM, isDiagnosticWithLocation } from "./utils.js";
-import { VirtualTypeScriptEnvironment } from "@typescript/vfs";
+import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
 
 export function getLints({
   env,

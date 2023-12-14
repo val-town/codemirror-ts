@@ -1,21 +1,19 @@
 import { hoverTooltip, Tooltip } from "@codemirror/view";
-import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
 import { getHover } from "./getHover.js";
 import { defaultRenderer, TooltipRenderer } from "./renderTooltip.js";
+import { tsFacet } from "../facet/tsFacet.js";
 
 export function tsHover({
-  env,
-  path,
   renderTooltip = defaultRenderer,
 }: {
-  env: VirtualTypeScriptEnvironment;
-  path: string;
   renderTooltip?: TooltipRenderer;
-}) {
+} = {}) {
   return hoverTooltip(async (view, pos): Promise<Tooltip | null> => {
+    const config = view.state.facet(tsFacet);
+    if (!config) return null;
+
     const hoverData = getHover({
-      env,
-      path,
+      ...config,
       pos,
     });
 
