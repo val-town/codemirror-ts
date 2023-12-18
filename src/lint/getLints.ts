@@ -1,6 +1,13 @@
 import { convertTSDiagnosticToCM, isDiagnosticWithLocation } from "./utils.js";
 import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
 
+/**
+ * Lower-level interface to get semantic and syntactic
+ * diagnostics from the TypeScript environment.
+ *
+ * This is used by tsLinter and tsLinterWorker,
+ * but you can use it directly to power other UI.
+ */
 export function getLints({
   env,
   path,
