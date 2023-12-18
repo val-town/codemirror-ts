@@ -3,6 +3,11 @@ import { getHover } from "./getHover.js";
 import { defaultRenderer, TooltipRenderer } from "./renderTooltip.js";
 import { tsFacet } from "../facet/tsFacet.js";
 
+/**
+ * This binds the CodeMirror `hoverTooltip` method
+ * with a code that pulls types and documentation
+ * from the TypeScript environment.
+ */
 export function tsHover({
   renderTooltip = defaultRenderer,
 }: {

@@ -2,6 +2,11 @@ import { hoverTooltip, Tooltip } from "@codemirror/view";
 import { defaultRenderer, type TooltipRenderer } from "./renderTooltip.js";
 import { tsFacetWorker } from "../index.js";
 
+/**
+ * This binds the CodeMirror `hoverTooltip` method
+ * with a code that pulls types and documentation
+ * from the TypeScript environment.
+ */
 export function tsHoverWorker({
   renderTooltip = defaultRenderer,
 }: {

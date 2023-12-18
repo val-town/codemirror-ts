@@ -6,6 +6,12 @@ export type TooltipRenderer = (
   editorView: EditorView,
 ) => TooltipView;
 
+/**
+ * Default, barebones tooltip renderer. Generates
+ * structure of a div, containing a series of
+ * span elements with the typescript `kind` as
+ * classes.
+ */
 export const defaultRenderer: TooltipRenderer = (info: HoverInfo) => {
   const div = document.createElement("div");
   if (info.quickInfo?.displayParts) {
