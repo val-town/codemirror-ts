@@ -9,15 +9,15 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
 
-      - name: tsc
-        run: npm run tsc
-      - name: test
-        run: npm run test
+      - run: npm run tsc
+      - run: npm run test
