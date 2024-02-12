@@ -59,5 +59,8 @@ export function createWorker(
       if (!env) return;
       return getHover({ env, path, pos });
     },
+    getEnv() {
+        return env
+    }
   };
 }
