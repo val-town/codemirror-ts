@@ -21,6 +21,6 @@ export function tsSync() {
     if (!config) return;
     if (!update.docChanged && !first) return;
     first = false;
-    createOrUpdateFile(config.env, config.path, update.state.doc.toString());
+    createOrUpdateFile(config.env, config.path, update.state.doc.toString() || ' ');
   });
 }
