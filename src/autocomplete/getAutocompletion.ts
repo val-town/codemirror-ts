@@ -3,13 +3,15 @@ import type {
   Completion,
   CompletionResult,
 } from "@codemirror/autocomplete";
-import { ScriptElementKind } from "typescript";
+import ts from "typescript";
 import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
 import { AUTOCOMPLETION_SYMBOLS } from "./symbols.js";
 import { DEFAULT_CODEMIRROR_TYPE_ICONS } from "./icons.js";
 import { matchBefore } from "./matchBefore.js";
 
-const TS_COMPLETE_BLOCKLIST: ScriptElementKind[] = [ScriptElementKind.warning];
+const TS_COMPLETE_BLOCKLIST: ts.ScriptElementKind[] = [
+  ts.ScriptElementKind.warning,
+];
 
 export async function getAutocompletion({
   env,
