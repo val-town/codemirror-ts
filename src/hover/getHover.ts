@@ -1,4 +1,4 @@
-import { type QuickInfo, type DefinitionInfo } from "typescript";
+import type ts from "typescript";
 import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
 
 /**
@@ -8,8 +8,8 @@ import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
 export interface HoverInfo {
   start: number;
   end: number;
-  typeDef: readonly DefinitionInfo[] | undefined;
-  quickInfo: QuickInfo | undefined;
+  typeDef: readonly ts.DefinitionInfo[] | undefined;
+  quickInfo: ts.QuickInfo | undefined;
 }
 
 export function getHover({

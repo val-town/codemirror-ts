@@ -1,8 +1,4 @@
-import {
-  type Diagnostic as TSDiagnostic,
-  type DiagnosticWithLocation,
-  DiagnosticCategory,
-} from "typescript";
+import ts from "typescript";
 import { type Diagnostic } from "@codemirror/lint";
 
 /**
@@ -11,20 +7,20 @@ import { type Diagnostic } from "@codemirror/lint";
  * Here, we do the mapping.
  */
 export function tsCategoryToSeverity(
-  diagnostic: Pick<DiagnosticWithLocation, "category" | "code">,
+  diagnostic: Pick<ts.DiagnosticWithLocation, "category" | "code">,
 ): Diagnostic["severity"] {
   if (diagnostic.code === 7027) {
     // Unreachable code detected
     return "warning";
   }
   switch (diagnostic.category) {
-    case DiagnosticCategory.Error:
+    case ts.DiagnosticCategory.Error:
       return "error";
-    case DiagnosticCategory.Message:
+    case ts.DiagnosticCategory.Message:
       return "info";
-    case DiagnosticCategory.Warning:
+    case ts.DiagnosticCategory.Warning:
       return "warning";
-    case DiagnosticCategory.Suggestion:
+    case ts.DiagnosticCategory.Suggestion:
       return "info";
   }
 }
@@ -35,8 +31,8 @@ export function tsCategoryToSeverity(
  * do.
  */
 export function isDiagnosticWithLocation(
-  diagnostic: TSDiagnostic,
-): diagnostic is DiagnosticWithLocation {
+  diagnostic: ts.Diagnostic,
+): diagnostic is ts.DiagnosticWithLocation {
   return !!(
     diagnostic.file &&
     typeof diagnostic.start === "number" &&
@@ -51,7 +47,7 @@ export function isDiagnosticWithLocation(
  * to get a string, regardless of which case we're in.
  */
 export function tsDiagnosticMessage(
-  diagnostic: Pick<TSDiagnostic, "messageText">,
+  diagnostic: Pick<ts.Diagnostic, "messageText">,
 ): string {
   if (typeof diagnostic.messageText === "string") {
     return diagnostic.messageText;
@@ -65,7 +61,9 @@ export function tsDiagnosticMessage(
  * ways of representing diagnostics. This converts
  * from one to the other.
  */
-export function convertTSDiagnosticToCM(d: DiagnosticWithLocation): Diagnostic {
+export function convertTSDiagnosticToCM(
+  d: ts.DiagnosticWithLocation,
+): Diagnostic {
   // We add some code at the end of the document, but we can't have a
   // diagnostic in an invalid range
   const start = d.start;

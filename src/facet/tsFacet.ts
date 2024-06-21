@@ -1,5 +1,5 @@
 import { combineConfig, Facet } from "@codemirror/state";
-import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
+import type ts from "@typescript/vfs";
 
 /**
  * This is how the ts-related extensions are
@@ -11,11 +11,11 @@ import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
 export const tsFacet = Facet.define<
   {
     path: string;
-    env: VirtualTypeScriptEnvironment;
+    env: ts.VirtualTypeScriptEnvironment;
   },
   {
     path: string;
-    env: VirtualTypeScriptEnvironment;
+    env: ts.VirtualTypeScriptEnvironment;
   } | null
 >({
   combine(configs) {
