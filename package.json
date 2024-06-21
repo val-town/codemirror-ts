@@ -24,14 +24,14 @@
     "@codemirror/view": "^6"
   },
   "devDependencies": {
-    "@codemirror/lang-javascript": "^6.2.1",
-    "@typescript/vfs": "^1.5.0",
+    "@codemirror/lang-javascript": "^6.2.2",
+    "@typescript/vfs": "^1.5.3",
     "codemirror": "^6",
     "comlink": "^4.4.1",
-    "tshy": "^1.8.0",
-    "typescript": "^5.2.2",
-    "vite": "^4.5.0",
-    "vitest": "^0.34.6"
+    "tshy": "^1.15.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1",
+    "vitest": "^1.6.0"
   },
   "files": [
     "dist"
@@ -47,20 +47,24 @@
     "./package.json": "./package.json",
     ".": {
       "import": {
+        "source": "./src/index.ts",
         "types": "./dist/esm/index.d.ts",
         "default": "./dist/esm/index.js"
       },
       "require": {
+        "source": "./src/index.ts",
         "types": "./dist/commonjs/index.d.ts",
         "default": "./dist/commonjs/index.js"
       }
     },
     "./worker": {
       "import": {
+        "source": "./src/worker.ts",
         "types": "./dist/esm/worker.d.ts",
         "default": "./dist/esm/worker.js"
       },
       "require": {
+        "source": "./src/worker.ts",
         "types": "./dist/commonjs/worker.d.ts",
         "default": "./dist/commonjs/worker.js"
       }
