@@ -34,7 +34,8 @@
     "vitest": "^1.6.0"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "tshy": {
     "exports": {
@@ -47,25 +48,25 @@
     "./package.json": "./package.json",
     ".": {
       "import": {
-        "source": "./src/index.ts",
         "types": "./dist/esm/index.d.ts",
+        "source": "./src/index.ts",
         "default": "./dist/esm/index.js"
       },
       "require": {
-        "source": "./src/index.ts",
         "types": "./dist/commonjs/index.d.ts",
+        "source": "./src/index.ts",
         "default": "./dist/commonjs/index.js"
       }
     },
     "./worker": {
       "import": {
-        "source": "./src/worker.ts",
         "types": "./dist/esm/worker.d.ts",
+        "source": "./src/worker.ts",
         "default": "./dist/esm/worker.js"
       },
       "require": {
-        "source": "./src/worker.ts",
         "types": "./dist/commonjs/worker.d.ts",
+        "source": "./src/worker.ts",
         "default": "./dist/commonjs/worker.js"
       }
     }
