@@ -209,8 +209,10 @@ with the main thread: it's the same setting-up of the TypeScript environment,
 but this time wrapping it in `Comlink.expose`, and, importantly, setting
 the third parameter of `createDefaultMapFromCDN` to false.
 
-The third option is whether to cache files: it uses `localStorage` to power
-that cache, and Web Workers don't support `localStorage`.
+The third option in `createDefaultMapFromCDN` is whether to cache files: it uses `localStorage` to power
+that cache, and Web Workers don't support `localStorage`. You can [implement](https://github.com/microsoft/TypeScript-Website/blob/v2/packages/typescript-vfs/src/index.ts#L368) your own `storer` instead.
+
+There is an optional fifth option in `createDefaultMapFromCDN` to pass in `lzstring` to compress files that as well. You can follow [this example](https://github.com/microsoft/TypeScript-Website/blob/v2/packages/sandbox/src/index.ts#L8) and add a `lzstring.min.js` file to your codebase if you want.
 
 2. Initialize the worker
 
@@ -224,7 +226,7 @@ import * as Comlink from "comlink";
 const innerWorker = new Worker(new URL("./worker.ts", import.meta.url), {
   type: "module",
 });
-const worker = Comlink.wrap(innerWorker) as WorkerShape;
+const worker = Comlink.wrap<WorkerShape>(innerWorker);
 await worker.initialize();
 ```
 
