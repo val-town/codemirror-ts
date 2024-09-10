@@ -7,9 +7,16 @@ import { tsFacetWorker } from "../index.js";
  * the `getLints` method for a lower-level interface
  * to the same data.
  */
-export function tsLinterWorker() {
+export function tsLinterWorker({
+  diagnosticCodesToIgnore,
+}: { diagnosticCodesToIgnore?: number[] } = {}) {
   return linter(async (view): Promise<readonly Diagnostic[]> => {
     const config = view.state.facet(tsFacetWorker);
-    return config ? config.worker.getLints({ path: config.path }) : [];
+    return config
+      ? config.worker.getLints({
+          path: config.path,
+          diagnosticCodesToIgnore: diagnosticCodesToIgnore || [],
+        })
+      : [];
   });
 }

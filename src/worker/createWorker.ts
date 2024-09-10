@@ -41,9 +41,15 @@ export function createWorker(
       if (!env) return;
       createOrUpdateFile(env, path, code);
     },
-    getLints({ path }: { path: string }) {
+    getLints({
+      path,
+      diagnosticCodesToIgnore,
+    }: {
+      path: string;
+      diagnosticCodesToIgnore: number[];
+    }) {
       if (!env) return [];
-      return getLints({ env, path });
+      return getLints({ env, path, diagnosticCodesToIgnore });
     },
     getAutocompletion({
       path,
@@ -60,7 +66,7 @@ export function createWorker(
       return getHover({ env, path, pos });
     },
     getEnv() {
-        return env
-    }
+      return env;
+    },
   };
 }

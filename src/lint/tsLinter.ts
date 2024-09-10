@@ -8,9 +8,16 @@ import { tsFacet } from "../facet/tsFacet.js";
  * the `getLints` method for a lower-level interface
  * to the same data.
  */
-export function tsLinter() {
+export function tsLinter({
+  diagnosticCodesToIgnore,
+}: { diagnosticCodesToIgnore?: number[] } = {}) {
   return linter(async (view): Promise<readonly Diagnostic[]> => {
     const config = view.state.facet(tsFacet);
-    return config ? getLints(config) : [];
+    return config
+      ? getLints({
+          ...config,
+          diagnosticCodesToIgnore: diagnosticCodesToIgnore || [],
+        })
+      : [];
   });
 }
