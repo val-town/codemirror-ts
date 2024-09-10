@@ -48,25 +48,25 @@
     "./package.json": "./package.json",
     ".": {
       "import": {
-        "types": "./dist/esm/index.d.ts",
         "source": "./src/index.ts",
+        "types": "./dist/esm/index.d.ts",
         "default": "./dist/esm/index.js"
       },
       "require": {
-        "types": "./dist/commonjs/index.d.ts",
         "source": "./src/index.ts",
+        "types": "./dist/commonjs/index.d.ts",
         "default": "./dist/commonjs/index.js"
       }
     },
     "./worker": {
       "import": {
-        "types": "./dist/esm/worker.d.ts",
         "source": "./src/worker.ts",
+        "types": "./dist/esm/worker.d.ts",
         "default": "./dist/esm/worker.js"
       },
       "require": {
-        "types": "./dist/commonjs/worker.d.ts",
         "source": "./src/worker.ts",
+        "types": "./dist/commonjs/worker.d.ts",
         "default": "./dist/commonjs/worker.js"
       }
     }
