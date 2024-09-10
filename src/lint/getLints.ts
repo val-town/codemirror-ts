@@ -1,3 +1,4 @@
+import type { DiagnosticWithLocation } from "typescript";
 import { convertTSDiagnosticToCM, isDiagnosticWithLocation } from "./utils.js";
 import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
 
@@ -11,9 +12,11 @@ import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
 export function getLints({
   env,
   path,
+  diagnosticCodesToIgnore,
 }: {
   env: VirtualTypeScriptEnvironment;
   path: string;
+  diagnosticCodesToIgnore: number[];
 }) {
   // Don't crash if the relevant file isn't created yet.
   const exists = env.getSourceFile(path);
@@ -23,7 +26,9 @@ export function getLints({
   const semanticDiagnostics = env.languageService.getSemanticDiagnostics(path);
 
   const diagnostics = [...syntaticDiagnostics, ...semanticDiagnostics].filter(
-    isDiagnosticWithLocation,
+    (diagnostic): diagnostic is DiagnosticWithLocation =>
+      isDiagnosticWithLocation(diagnostic) &&
+      !diagnosticCodesToIgnore.includes(diagnostic.code),
   );
 
   return diagnostics.map(convertTSDiagnosticToCM);
