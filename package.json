@@ -1,6 +1,6 @@
 {
 	"name": "@valtown/codemirror-ts",
-	"version": "2.2.0",
+	"version": "2.2.1",
 	"description": "codemirror extensions for typescript",
 	"main": "./dist/commonjs/index.js",
 	"sideEffects": false,
