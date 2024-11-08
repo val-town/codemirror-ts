@@ -1,79 +1,73 @@
 {
-  "name": "@valtown/codemirror-ts",
-  "version": "2.2.0",
-  "description": "codemirror extensions for typescript",
-  "main": "./dist/commonjs/index.js",
-  "scripts": {
-    "prepare": "tshy",
-    "dev": "vite",
-    "tsc": "tsc --noEmit",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "build": "vite build"
-  },
-  "keywords": [
-    "codemirror",
-    "typescript",
-    "ts"
-  ],
-  "author": "Val Town",
-  "license": "ISC",
-  "peerDependencies": {
-    "@codemirror/autocomplete": "^6",
-    "@codemirror/lint": "^6",
-    "@codemirror/view": "^6"
-  },
-  "devDependencies": {
-    "@codemirror/lang-javascript": "^6.2.2",
-    "@typescript/vfs": "^1.5.3",
-    "codemirror": "^6",
-    "comlink": "^4.4.1",
-    "tshy": "^1.15.1",
-    "typescript": "^5.5.2",
-    "vite": "^5.3.1",
-    "vitest": "^1.6.0"
-  },
-  "files": [
-    "dist",
-    "src"
-  ],
-  "tshy": {
-    "exports": {
-      "./package.json": "./package.json",
-      ".": "./src/index.ts",
-      "./worker": "./src/worker.ts"
-    }
-  },
-  "exports": {
-    "./package.json": "./package.json",
-    ".": {
-      "import": {
-        "source": "./src/index.ts",
-        "types": "./dist/esm/index.d.ts",
-        "default": "./dist/esm/index.js"
-      },
-      "require": {
-        "source": "./src/index.ts",
-        "types": "./dist/commonjs/index.d.ts",
-        "default": "./dist/commonjs/index.js"
-      }
-    },
-    "./worker": {
-      "import": {
-        "source": "./src/worker.ts",
-        "types": "./dist/esm/worker.d.ts",
-        "default": "./dist/esm/worker.js"
-      },
-      "require": {
-        "source": "./src/worker.ts",
-        "types": "./dist/commonjs/worker.d.ts",
-        "default": "./dist/commonjs/worker.js"
-      }
-    }
-  },
-  "types": "./dist/commonjs/index.d.ts",
-  "type": "module",
-  "engines": {
-    "node": "*"
-  }
+	"name": "@valtown/codemirror-ts",
+	"version": "2.2.0",
+	"description": "codemirror extensions for typescript",
+	"main": "./dist/commonjs/index.js",
+	"sideEffects": false,
+	"scripts": {
+		"prepare": "tshy",
+		"dev": "vite",
+		"tsc": "tsc --noEmit",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"build": "vite build"
+	},
+	"keywords": ["codemirror", "typescript", "ts"],
+	"author": "Val Town",
+	"license": "ISC",
+	"peerDependencies": {
+		"@codemirror/autocomplete": "^6",
+		"@codemirror/lint": "^6",
+		"@codemirror/view": "^6"
+	},
+	"devDependencies": {
+		"@codemirror/lang-javascript": "^6.2.2",
+		"@typescript/vfs": "^1.5.3",
+		"codemirror": "^6",
+		"comlink": "^4.4.1",
+		"tshy": "^1.15.1",
+		"typescript": "^5.5.2",
+		"vite": "^5.3.1",
+		"vitest": "^1.6.0"
+	},
+	"files": ["dist", "src"],
+	"tshy": {
+		"exports": {
+			"./package.json": "./package.json",
+			".": "./src/index.ts",
+			"./worker": "./src/worker.ts"
+		}
+	},
+	"exports": {
+		"./package.json": "./package.json",
+		".": {
+			"import": {
+				"source": "./src/index.ts",
+				"types": "./dist/esm/index.d.ts",
+				"default": "./dist/esm/index.js"
+			},
+			"require": {
+				"source": "./src/index.ts",
+				"types": "./dist/commonjs/index.d.ts",
+				"default": "./dist/commonjs/index.js"
+			}
+		},
+		"./worker": {
+			"import": {
+				"source": "./src/worker.ts",
+				"types": "./dist/esm/worker.d.ts",
+				"default": "./dist/esm/worker.js"
+			},
+			"require": {
+				"source": "./src/worker.ts",
+				"types": "./dist/commonjs/worker.d.ts",
+				"default": "./dist/commonjs/worker.js"
+			}
+		}
+	},
+	"types": "./dist/commonjs/index.d.ts",
+	"type": "module",
+	"engines": {
+		"node": "*"
+	}
 }
