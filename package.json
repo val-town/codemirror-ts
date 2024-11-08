@@ -12,7 +12,11 @@
 		"test:watch": "vitest",
 		"build": "vite build"
 	},
-	"keywords": ["codemirror", "typescript", "ts"],
+	"keywords": [
+		"codemirror",
+		"typescript",
+		"ts"
+	],
 	"author": "Val Town",
 	"license": "ISC",
 	"peerDependencies": {
@@ -30,7 +34,10 @@
 		"vite": "^5.3.1",
 		"vitest": "^1.6.0"
 	},
-	"files": ["dist", "src"],
+	"files": [
+		"dist",
+		"src"
+	],
 	"tshy": {
 		"exports": {
 			"./package.json": "./package.json",
