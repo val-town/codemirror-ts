@@ -12,10 +12,12 @@ export const tsFacet = Facet.define<
   {
     path: string;
     env: ts.VirtualTypeScriptEnvironment;
+    keepLegacyLimitationForAutocompletionSymbols?: boolean;
   },
   {
     path: string;
     env: ts.VirtualTypeScriptEnvironment;
+    keepLegacyLimitationForAutocompletionSymbols?: boolean;
   } | null
 >({
   combine(configs) {

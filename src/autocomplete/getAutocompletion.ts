@@ -17,9 +17,11 @@ export async function getAutocompletion({
   env,
   path,
   context,
+  keepLegacyLimitationForAutocompletionSymbols = true,
 }: {
   env: VirtualTypeScriptEnvironment;
   path: string;
+  keepLegacyLimitationForAutocompletionSymbols?: boolean;
   /**
    * Allow this to be a subset of the full CompletionContext
    * object, because the raw object isn't serializable.
@@ -57,7 +59,7 @@ export async function getAutocompletion({
         !TS_COMPLETE_BLOCKLIST.includes(entry.kind) &&
         (entry.sortText < "15" ||
           (completionInfo.optionalReplacementSpan?.length &&
-            AUTOCOMPLETION_SYMBOLS.includes(entry.name))),
+            (!keepLegacyLimitationForAutocompletionSymbols || AUTOCOMPLETION_SYMBOLS.includes(entry.name)))),
     )
     .map((entry): Completion => {
       const boost = -Number(entry.sortText) || 0;
