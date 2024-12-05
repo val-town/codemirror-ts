@@ -44,12 +44,14 @@ export function createWorker(
     getLints({
       path,
       diagnosticCodesToIgnore,
+      libraries,
     }: {
       path: string;
       diagnosticCodesToIgnore: number[];
+      libraries?: Record<string, string>;
     }) {
       if (!env) return [];
-      return getLints({ env, path, diagnosticCodesToIgnore });
+      return getLints({ env, path, diagnosticCodesToIgnore, libraries });
     },
     getAutocompletion({
       path,

@@ -8,17 +8,20 @@ import type ts from "@typescript/vfs";
  * the extensions, like tsLint and tsAutocomplete,
  * pull those settings automatically from editor state.
  */
+export interface TSFacetConfig {
+  path: string;
+  env: ts.VirtualTypeScriptEnvironment;
+  keepLegacyLimitationForAutocompletionSymbols?: boolean;
+  /**
+   * External library configurations.
+   * Key is the library name, value is the types URL or content
+   */
+  libraries?: Record<string, string>;
+}
+
 export const tsFacet = Facet.define<
-  {
-    path: string;
-    env: ts.VirtualTypeScriptEnvironment;
-    keepLegacyLimitationForAutocompletionSymbols?: boolean;
-  },
-  {
-    path: string;
-    env: ts.VirtualTypeScriptEnvironment;
-    keepLegacyLimitationForAutocompletionSymbols?: boolean;
-  } | null
+  TSFacetConfig,
+  TSFacetConfig | null
 >({
   combine(configs) {
     return combineConfig(configs, {});

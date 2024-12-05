@@ -11,15 +11,19 @@ import { type WorkerShape } from "../worker.js";
  * the extensions, like tsLint and tsAutocomplete,
  * pull those settings automatically from editor state.
  */
+export interface TSFacetWorkerConfig {
+  path: string;
+  worker: WorkerShape;
+  /**
+   * External library configurations.
+   * Key is the library name, value is the types URL or content
+   */
+  libraries?: Record<string, string>;
+}
+
 export const tsFacetWorker = Facet.define<
-  {
-    path: string;
-    worker: WorkerShape;
-  },
-  {
-    path: string;
-    worker: WorkerShape;
-  } | null
+  TSFacetWorkerConfig,
+  TSFacetWorkerConfig | null
 >({
   combine(configs) {
     return combineConfig(configs, {});
