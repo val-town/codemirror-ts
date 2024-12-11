@@ -1,13 +1,19 @@
 {
+	"$schema": "https://json.schemastore.org/package.json",
 	"name": "@valtown/codemirror-ts",
-	"version": "2.3.1",
+	"version": "3.0.0-9",
 	"description": "codemirror extensions for typescript",
-	"main": "./dist/commonjs/index.js",
 	"sideEffects": false,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/val-town/val.town"
+	},
+	"homepage": "https://github.com/val-town/val.town",
 	"scripts": {
-		"prepare": "tshy",
+		"prepare": "tsc",
 		"dev": "vite",
-		"tsc": "tsc --noEmit",
+		"typecheck": "tsc --noEmit",
+		"lint": "biome check",
 		"test": "vitest run",
 		"test:watch": "vitest",
 		"build": "vite build"
@@ -28,55 +34,38 @@
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
 		"@codemirror/lang-javascript": "^6.2.2",
+		"@types/node": "^22.10.2",
 		"@typescript/vfs": "^1.6.0",
+		"@vitest/coverage-v8": "^2.1.8",
 		"codemirror": "^6",
 		"comlink": "^4.4.2",
-		"tshy": "^3.0.2",
+		"happy-dom": "^15.11.7",
 		"typescript": "^5.7.2",
 		"vite": "^6.0.3",
 		"vitest": "^2.1.8"
 	},
 	"files": [
-		"dist",
-		"src"
+		"dist"
 	],
-	"tshy": {
-		"exports": {
-			"./package.json": "./package.json",
-			".": "./src/index.ts",
-			"./worker": "./src/worker.ts"
-		}
-	},
 	"exports": {
 		"./package.json": "./package.json",
 		".": {
 			"import": {
-				"types": "./dist/esm/index.d.ts",
-				"default": "./dist/esm/index.js"
-			},
-			"require": {
-				"types": "./dist/commonjs/index.d.ts",
-				"default": "./dist/commonjs/index.js"
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
 			}
 		},
 		"./worker": {
 			"import": {
-				"types": "./dist/esm/worker.d.ts",
-				"default": "./dist/esm/worker.js"
-			},
-			"require": {
-				"types": "./dist/commonjs/worker.d.ts",
-				"default": "./dist/commonjs/worker.js"
+				"types": "./dist/worker.d.ts",
+				"default": "./dist/worker.js"
 			}
 		}
 	},
-	"types": "./dist/commonjs/index.d.ts",
+	"types": "./dist/index.d.ts",
 	"type": "module",
 	"engines": {
 		"node": "*"
 	},
-	"module": "./dist/esm/index.js",
-	"dependencies": {
-		"@codemirror/state": "^6.5.0"
-	}
+	"module": "./dist/index.js"
 }
