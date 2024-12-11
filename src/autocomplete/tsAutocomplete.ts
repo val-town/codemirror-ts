@@ -5,6 +5,7 @@ import type {
 } from "@codemirror/autocomplete";
 import { getAutocompletion } from "./getAutocompletion.js";
 import { tsFacet } from "../facet/tsFacet.js";
+import { deserializeCompletions } from "./deserializeCompletions.js";
 
 /**
  * Create a `CompletionSource` that queries
@@ -17,9 +18,11 @@ export function tsAutocomplete(): CompletionSource {
   ): Promise<CompletionResult | null> => {
     const config = context.state.facet(tsFacet);
     if (!config) return null;
-    return getAutocompletion({
-      ...config,
-      context,
-    });
+    return deserializeCompletions(
+      await getAutocompletion({
+        ...config,
+        context,
+      }),
+    );
   };
 }
