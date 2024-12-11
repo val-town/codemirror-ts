@@ -13,10 +13,12 @@ export function getLints({
   env,
   path,
   diagnosticCodesToIgnore,
+  libraries,
 }: {
   env: VirtualTypeScriptEnvironment;
   path: string;
   diagnosticCodesToIgnore: number[];
+  libraries?: Record<string, string>;
 }) {
   // Don't crash if the relevant file isn't created yet.
   const exists = env.getSourceFile(path);

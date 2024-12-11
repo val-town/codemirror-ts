@@ -17,6 +17,7 @@ export function tsLinter({
       ? getLints({
           ...config,
           diagnosticCodesToIgnore: diagnosticCodesToIgnore || [],
+          libraries: config.libraries,
         })
       : [];
   });
