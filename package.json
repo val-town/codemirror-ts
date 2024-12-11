@@ -22,7 +22,8 @@
 	"peerDependencies": {
 		"@codemirror/autocomplete": "^6",
 		"@codemirror/lint": "^6",
-		"@codemirror/view": "^6"
+		"@codemirror/view": "^6",
+		"@codemirror/state": "^6"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
@@ -74,8 +75,5 @@
 	"engines": {
 		"node": "*"
 	},
-	"module": "./dist/esm/index.js",
-	"dependencies": {
-		"@codemirror/state": "^6.5.0"
-	}
+	"module": "./dist/esm/index.js"
 }
