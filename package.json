@@ -25,14 +25,15 @@
 		"@codemirror/view": "^6"
 	},
 	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
 		"@codemirror/lang-javascript": "^6.2.2",
-		"@typescript/vfs": "^1.5.3",
+		"@typescript/vfs": "^1.6.0",
 		"codemirror": "^6",
-		"comlink": "^4.4.1",
-		"tshy": "^1.15.1",
-		"typescript": "^5.5.2",
-		"vite": "^5.3.1",
-		"vitest": "^1.6.0"
+		"comlink": "^4.4.2",
+		"tshy": "^3.0.2",
+		"typescript": "^5.7.2",
+		"vite": "^6.0.3",
+		"vitest": "^2.1.8"
 	},
 	"files": [
 		"dist",
@@ -49,24 +50,20 @@
 		"./package.json": "./package.json",
 		".": {
 			"import": {
-				"source": "./src/index.ts",
 				"types": "./dist/esm/index.d.ts",
 				"default": "./dist/esm/index.js"
 			},
 			"require": {
-				"source": "./src/index.ts",
 				"types": "./dist/commonjs/index.d.ts",
 				"default": "./dist/commonjs/index.js"
 			}
 		},
 		"./worker": {
 			"import": {
-				"source": "./src/worker.ts",
 				"types": "./dist/esm/worker.d.ts",
 				"default": "./dist/esm/worker.js"
 			},
 			"require": {
-				"source": "./src/worker.ts",
 				"types": "./dist/commonjs/worker.d.ts",
 				"default": "./dist/commonjs/worker.js"
 			}
@@ -76,5 +73,6 @@
 	"type": "module",
 	"engines": {
 		"node": "*"
-	}
+	},
+	"module": "./dist/esm/index.js"
 }
