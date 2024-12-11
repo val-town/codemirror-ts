@@ -1,4 +1,4 @@
-import type { CompletionContext, Completion } from "@codemirror/autocomplete";
+import type { CompletionContext } from "@codemirror/autocomplete";
 import ts from "typescript";
 import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
 import { AUTOCOMPLETION_SYMBOLS } from "./symbols.js";
