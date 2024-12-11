@@ -1,13 +1,10 @@
-import type {
-  CompletionContext,
-  Completion,
-  CompletionResult,
-} from "@codemirror/autocomplete";
+import type { CompletionContext, Completion } from "@codemirror/autocomplete";
 import ts from "typescript";
 import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
 import { AUTOCOMPLETION_SYMBOLS } from "./symbols.js";
 import { DEFAULT_CODEMIRROR_TYPE_ICONS } from "./icons.js";
 import { matchBefore } from "./matchBefore.js";
+import { RawCompletion, RawCompletionItem } from "../types.js";
 
 const TS_COMPLETE_BLOCKLIST: ts.ScriptElementKind[] = [
   ts.ScriptElementKind.warning,
@@ -27,7 +24,7 @@ export async function getAutocompletion({
    * object, because the raw object isn't serializable.
    */
   context: Pick<CompletionContext, "pos" | "explicit">;
-}): Promise<CompletionResult | null> {
+}): Promise<RawCompletion | null> {
   const { pos, explicit } = context;
   const rawContents = env.getSourceFile(path)?.getFullText();
 
@@ -45,7 +42,10 @@ export async function getAutocompletion({
   const completionInfo = env.languageService.getCompletionsAtPosition(
     path,
     pos,
-    {},
+    {
+      includeCompletionsForModuleExports: true,
+      includeCompletionsForImportStatements: true,
+    },
     {},
   );
 
@@ -59,10 +59,10 @@ export async function getAutocompletion({
         !TS_COMPLETE_BLOCKLIST.includes(entry.kind) &&
         (entry.sortText < "15" ||
           (completionInfo.optionalReplacementSpan?.length &&
-            (!keepLegacyLimitationForAutocompletionSymbols || AUTOCOMPLETION_SYMBOLS.includes(entry.name)))),
+            (!keepLegacyLimitationForAutocompletionSymbols ||
+              AUTOCOMPLETION_SYMBOLS.includes(entry.name)))),
     )
-    .map((entry): Completion => {
-      const boost = -Number(entry.sortText) || 0;
+    .map((entry): RawCompletionItem => {
       let type = entry.kind ? String(entry.kind) : undefined;
 
       if (type === "member") type = "property";
@@ -71,10 +71,20 @@ export async function getAutocompletion({
         type = undefined;
       }
 
+      const details = env.languageService.getCompletionEntryDetails(
+        path,
+        pos,
+        entry.name,
+        {},
+        entry.source,
+        {},
+        entry.data,
+      );
+
       return {
         label: entry.name,
+        codeActions: details?.codeActions,
         type,
-        boost,
       };
     });
 
