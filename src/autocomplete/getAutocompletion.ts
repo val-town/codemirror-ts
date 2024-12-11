@@ -84,6 +84,9 @@ export async function getAutocompletion({
       return {
         label: entry.name,
         codeActions: details?.codeActions,
+        displayParts: details?.displayParts ?? [],
+        documentation: details?.documentation,
+        tags: details?.tags,
         type,
       };
     });
