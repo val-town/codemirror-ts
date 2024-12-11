@@ -1,5 +1,6 @@
 import { EditorView, TooltipView } from "@codemirror/view";
 import { HoverInfo } from "./getHover.js";
+import ts from "typescript";
 
 export type TooltipRenderer = (
   arg0: HoverInfo,
@@ -15,11 +16,17 @@ export type TooltipRenderer = (
 export const defaultRenderer: TooltipRenderer = (info: HoverInfo) => {
   const div = document.createElement("div");
   if (info.quickInfo?.displayParts) {
-    for (let part of info.quickInfo.displayParts) {
-      const span = div.appendChild(document.createElement("span"));
-      span.className = `quick-info-${part.kind}`;
-      span.innerText = part.text;
-    }
+    div.appendChild(renderDisplayParts(info.quickInfo.displayParts));
   }
   return { dom: div };
+};
+
+export const renderDisplayParts = (displayParts: ts.SymbolDisplayPart[]) => {
+  const div = document.createElement("div");
+  for (let part of displayParts) {
+    const span = div.appendChild(document.createElement("span"));
+    span.className = `quick-info-${part.kind}`;
+    span.innerText = part.text;
+  }
+  return div;
 };

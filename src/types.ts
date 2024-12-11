@@ -10,8 +10,10 @@ import ts from "typescript";
 export type RawCompletionItem = {
   label: string;
   type: Completion["type"];
-  codeActions: ts.CodeAction[] | undefined;
-};
+} & Pick<
+  ts.CompletionEntryDetails,
+  "codeActions" | "displayParts" | "documentation" | "tags"
+>;
 
 export type RawCompletion = {
   from: number;

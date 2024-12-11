@@ -5,6 +5,7 @@ import {
 } from "@codemirror/autocomplete";
 import { RawCompletion, RawCompletionItem } from "../types.js";
 import { TransactionSpec } from "@codemirror/state";
+import { renderDisplayParts } from "../hover/renderTooltip.js";
 
 export function deserializeCompletions(raw: RawCompletion | null) {
   if (!raw) return raw;
@@ -67,7 +68,9 @@ function deserializeCompletion(raw: RawCompletionItem): Completion {
         }
       : raw.label,
     info: () => {
-      return null;
+      const elem = document.createElement("div");
+      elem.appendChild(renderDisplayParts(raw.displayParts));
+      return elem;
     },
   };
 }
