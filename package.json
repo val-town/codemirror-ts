@@ -25,6 +25,7 @@
 		"@codemirror/view": "^6"
 	},
 	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
 		"@codemirror/lang-javascript": "^6.2.2",
 		"@typescript/vfs": "^1.6.0",
 		"codemirror": "^6",
