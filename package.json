@@ -75,5 +75,8 @@
 	"engines": {
 		"node": "*"
 	},
-	"module": "./dist/esm/index.js"
+	"module": "./dist/esm/index.js",
+	"dependencies": {
+		"@codemirror/state": "^6.5.0"
+	}
 }
