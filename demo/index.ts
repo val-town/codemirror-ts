@@ -25,13 +25,14 @@ import { WorkerShape } from "../src/worker.js";
 (async () => {
   const fsMap = await createDefaultMapFromCDN(
     { target: ts.ScriptTarget.ES2022 },
-    "3.7.3",
+    ts.version,
     true,
     ts,
   );
   const system = createSystem(fsMap);
-  const compilerOpts = {};
-  const env = createVirtualTypeScriptEnvironment(system, [], ts, compilerOpts);
+  const env = createVirtualTypeScriptEnvironment(system, [], ts, {
+    lib: ["ES2022"],
+  });
 
   const path = "index.ts";
 

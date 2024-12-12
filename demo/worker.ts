@@ -11,12 +11,13 @@ Comlink.expose(
   createWorker(async function () {
     const fsMap = await createDefaultMapFromCDN(
       { target: ts.ScriptTarget.ES2022 },
-      "3.7.3",
+      ts.version,
       false,
       ts,
     );
     const system = createSystem(fsMap);
-    const compilerOpts = {};
-    return createVirtualTypeScriptEnvironment(system, [], ts, compilerOpts);
+    return createVirtualTypeScriptEnvironment(system, [], ts, {
+      lib: ["ES2022"],
+    });
   }),
 );

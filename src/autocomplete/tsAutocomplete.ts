@@ -17,7 +17,7 @@ export function tsAutocomplete(): CompletionSource {
     context: CompletionContext,
   ): Promise<CompletionResult | null> => {
     const config = context.state.facet(tsFacet);
-    if (!config) return null;
+    if (!config?.env) return null;
     return deserializeCompletions(
       await getAutocompletion({
         ...config,
