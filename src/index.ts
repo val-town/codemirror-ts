@@ -17,3 +17,5 @@ export * from "./hover/renderTooltip.js";
 
 export * from "./facet/tsFacet.js";
 export * from "./facet/tsFacetWorker.js";
+
+export * from "./goto/tsGotoWorker.js";

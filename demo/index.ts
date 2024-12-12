@@ -18,6 +18,7 @@ import {
   tsSyncWorker,
   tsFacet,
   tsFacetWorker,
+  tsGotoWorker,
 } from "../src/index.js";
 import * as Comlink from "comlink";
 import { WorkerShape } from "../src/worker.js";
@@ -124,6 +125,7 @@ increment('not a number');`,
         ],
       }),
       tsHoverWorker(),
+      tsGotoWorker(),
     ],
     parent: document.querySelector("#editor-worker")!,
   });
