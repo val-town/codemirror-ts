@@ -5,7 +5,13 @@ on: push
 jobs:
   build:
     name: Test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest    
+
+    permissions:
+      # Required to checkout the code
+      contents: read
+      # Required to put a comment into the pull-request
+      pull-requests: write
 
     steps:
       - name: Checkout repo
@@ -21,3 +27,8 @@ jobs:
 
       - run: npm run typecheck
       - run: npm run test
+      - name: 'Report Coverage'
+        # Set if: always() to also generate the report if tests are failing
+        # Only works if you set `reportOnFailure: true` in your vite config as specified above
+        if: always() 
+        uses:  davelosert/vitest-coverage-report-action@v2

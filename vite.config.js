@@ -4,6 +4,7 @@ export default {
   outDir: "build",
   test: {
     coverage: {
+      enabled: true,
       include: ["src/**"],
       exclude: ["demo/**", "scripts/**"],
     },
