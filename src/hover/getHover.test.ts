@@ -1,25 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { getHover } from "./getHover.js";
-import {
-  createSystem,
-  createVirtualTypeScriptEnvironment,
-} from "@typescript/vfs";
-import ts from "typescript";
-import * as Fs from "node:fs";
-
-const fsMap = new Map<string, string>(
-  JSON.parse(
-    Fs.readFileSync(new URL("../../test/cdn.json", import.meta.url), "utf8"),
-  ),
-);
-
-const system = createSystem(fsMap);
+import { getEnv } from "../../test/env.js";
 
 describe("getHover", () => {
   it("null", async () => {
-    const env = createVirtualTypeScriptEnvironment(system, [], ts, {
-      lib: ["es2022"],
-    });
+    const env = getEnv();
 
     const name = "/foo.ts";
     const content = "const x = 'hi'.";
