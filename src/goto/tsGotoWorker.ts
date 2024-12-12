@@ -1,15 +1,41 @@
 import { EditorView } from "@codemirror/view";
-import { tsFacetWorker } from "../index.js";
+import { type HoverInfo, tsFacetWorker } from "../index.js";
+
+export function defaultGotoHandler(
+  currentPath: string,
+  hoverData: HoverInfo,
+  view: EditorView,
+) {
+  const definition = hoverData?.typeDef?.at(0);
+
+  if (definition) {
+    if (currentPath === definition.fileName) {
+      const tr = view.state.update({
+        selection: {
+          anchor: definition.textSpan.start,
+          head: definition.textSpan.start + definition.textSpan.length,
+        },
+      });
+      view.dispatch(tr);
+    }
+  }
+}
+
+type ToGoOptions = {
+  gotoHandler?: typeof defaultGotoHandler;
+};
 
 /**
  * Supports 'going to' a variable definition by meta or
  * ctrl-clicking on it.
  */
-export function tsGotoWorker() {
+export function tsGotoWorker(
+  opts: ToGoOptions = { gotoHandler: defaultGotoHandler },
+) {
   return EditorView.domEventHandlers({
     click: (event, view) => {
       const config = view.state.facet(tsFacetWorker);
-      if (!config?.worker) return false;
+      if (!config?.worker || !opts.gotoHandler) return false;
 
       // TODO: maybe this should be _just_ meta?
       // I think ctrl should probably be preserved.
@@ -29,18 +55,12 @@ export function tsGotoWorker() {
           pos,
         })
         .then((hoverData) => {
-          const definition = hoverData?.typeDef?.at(0);
-
-          if (definition) {
-            if (config.path === definition.fileName) {
-              const tr = view.state.update({
-                selection: {
-                  anchor: definition.textSpan.start,
-                  head: definition.textSpan.start + definition.textSpan.length,
-                },
-              });
-              view.dispatch(tr);
-            }
+          // In reality, we enforced that opts.gotoHandler
+          // is non-nullable earlier, but TypeScript knows
+          // that in this callback, that theoretically could
+          // have changed.
+          if (hoverData && opts.gotoHandler) {
+            opts.gotoHandler(config.path, hoverData, view);
           }
         });
 
