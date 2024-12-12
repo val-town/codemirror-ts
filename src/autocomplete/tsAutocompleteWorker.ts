@@ -5,7 +5,7 @@ import type {
 } from "@codemirror/autocomplete";
 import { tsFacetWorker } from "../index.js";
 import { deserializeCompletions } from "./deserializeCompletions.js";
-import { AutocompleteOptions } from "./types.js";
+import type { AutocompleteOptions } from "./types.js";
 
 /**
  * Create a `CompletionSource` that queries
@@ -18,7 +18,7 @@ export function tsAutocompleteWorker(
     context: CompletionContext,
   ): Promise<CompletionResult | null> => {
     const config = context.state.facet(tsFacetWorker);
-    if (!config) return null;
+    if (!config?.worker) return null;
     const completion = deserializeCompletions(
       await config.worker.getAutocompletion({
         path: config.path,
