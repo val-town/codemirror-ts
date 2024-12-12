@@ -5,18 +5,13 @@
 	"main": "./dist/commonjs/index.js",
 	"sideEffects": false,
 	"scripts": {
-		"prepare": "tshy",
+		"prepare": "tsc",
 		"dev": "vite",
-		"tsc": "tsc --noEmit",
 		"test": "vitest run",
 		"test:watch": "vitest",
 		"build": "vite build"
 	},
-	"keywords": [
-		"codemirror",
-		"typescript",
-		"ts"
-	],
+	"keywords": ["codemirror", "typescript", "ts"],
 	"author": "Val Town",
 	"license": "ISC",
 	"peerDependencies": {
@@ -38,17 +33,7 @@
 		"vite": "^6.0.3",
 		"vitest": "^2.1.8"
 	},
-	"files": [
-		"dist",
-		"src"
-	],
-	"tshy": {
-		"exports": {
-			"./package.json": "./package.json",
-			".": "./src/index.ts",
-			"./worker": "./src/worker.ts"
-		}
-	},
+	"files": ["dist", "src"],
 	"exports": {
 		"./package.json": "./package.json",
 		".": {
