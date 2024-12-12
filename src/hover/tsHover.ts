@@ -9,25 +9,25 @@ import { type TooltipRenderer, defaultRenderer } from "./renderTooltip.js";
  * from the TypeScript environment.
  */
 export function tsHover({
-	renderTooltip = defaultRenderer,
+  renderTooltip = defaultRenderer,
 }: {
-	renderTooltip?: TooltipRenderer;
+  renderTooltip?: TooltipRenderer;
 } = {}) {
-	return hoverTooltip(async (view, pos): Promise<Tooltip | null> => {
-		const config = view.state.facet(tsFacet);
-		if (!config) return null;
+  return hoverTooltip(async (view, pos): Promise<Tooltip | null> => {
+    const config = view.state.facet(tsFacet);
+    if (!config?.env) return null;
 
-		const hoverData = getHover({
-			...config,
-			pos,
-		});
+    const hoverData = getHover({
+      ...config,
+      pos,
+    });
 
-		if (!hoverData) return null;
+    if (!hoverData) return null;
 
-		return {
-			pos: hoverData.start,
-			end: hoverData.end,
-			create: () => renderTooltip(hoverData, view),
-		};
-	});
+    return {
+      pos: hoverData.start,
+      end: hoverData.end,
+      create: () => renderTooltip(hoverData, view),
+    };
+  });
 }
