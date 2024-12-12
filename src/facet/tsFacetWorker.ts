@@ -1,5 +1,5 @@
-import { combineConfig, Facet } from "@codemirror/state";
-import { type WorkerShape } from "../worker.js";
+import { Facet, combineConfig } from "@codemirror/state";
+import type { WorkerShape } from "../worker.js";
 
 /**
  * Use this facet if you intend to run your TypeScript
@@ -12,16 +12,16 @@ import { type WorkerShape } from "../worker.js";
  * pull those settings automatically from editor state.
  */
 export const tsFacetWorker = Facet.define<
-  {
-    path: string;
-    worker: WorkerShape;
-  },
-  {
-    path: string;
-    worker: WorkerShape;
-  } | null
+	{
+		path: string;
+		worker: WorkerShape;
+	},
+	{
+		path: string;
+		worker: WorkerShape;
+	} | null
 >({
-  combine(configs) {
-    return combineConfig(configs, {});
-  },
+	combine(configs) {
+		return combineConfig(configs, {});
+	},
 });

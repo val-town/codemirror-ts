@@ -1,18 +1,18 @@
+import * as Fs from "node:fs";
 import {
-  createSystem,
-  createVirtualTypeScriptEnvironment,
+	createSystem,
+	createVirtualTypeScriptEnvironment,
 } from "@typescript/vfs";
 import ts from "typescript";
-import * as Fs from "node:fs";
 
 const fsMap = new Map<string, string>(
-  JSON.parse(Fs.readFileSync(new URL("./cdn.json", import.meta.url), "utf8")),
+	JSON.parse(Fs.readFileSync("./test/cdn.json", "utf8")),
 );
 
 const system = createSystem(fsMap);
 
 export function getEnv() {
-  return createVirtualTypeScriptEnvironment(system, [], ts, {
-    lib: ["es2022"],
-  });
+	return createVirtualTypeScriptEnvironment(system, [], ts, {
+		lib: ["es2022"],
+	});
 }

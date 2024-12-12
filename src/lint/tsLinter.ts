@@ -1,6 +1,6 @@
-import { linter, Diagnostic } from "@codemirror/lint";
-import { getLints } from "./getLints.js";
+import { type Diagnostic, linter } from "@codemirror/lint";
 import { tsFacet } from "../facet/tsFacet.js";
+import { getLints } from "./getLints.js";
 
 /**
  * Binds the TypeScript `lint()` method with TypeScript's
@@ -9,15 +9,15 @@ import { tsFacet } from "../facet/tsFacet.js";
  * to the same data.
  */
 export function tsLinter({
-  diagnosticCodesToIgnore,
+	diagnosticCodesToIgnore,
 }: { diagnosticCodesToIgnore?: number[] } = {}) {
-  return linter(async (view): Promise<readonly Diagnostic[]> => {
-    const config = view.state.facet(tsFacet);
-    return config
-      ? getLints({
-          ...config,
-          diagnosticCodesToIgnore: diagnosticCodesToIgnore || [],
-        })
-      : [];
-  });
+	return linter(async (view): Promise<readonly Diagnostic[]> => {
+		const config = view.state.facet(tsFacet);
+		return config
+			? getLints({
+					...config,
+					diagnosticCodesToIgnore: diagnosticCodesToIgnore || [],
+				})
+			: [];
+	});
 }

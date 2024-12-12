@@ -5,16 +5,16 @@
  * of these, we pass it through.
  */
 export const DEFAULT_CODEMIRROR_TYPE_ICONS = new Set([
-  `class`,
-  `constant`,
-  `enum`,
-  `function`,
-  `interface`,
-  `keyword`,
-  `method`,
-  `namespace`,
-  `property`,
-  `text`,
-  `type`,
-  `variable`,
+	"class",
+	"constant",
+	"enum",
+	"function",
+	"interface",
+	"keyword",
+	"method",
+	"namespace",
+	"property",
+	"text",
+	"type",
+	"variable",
 ]);

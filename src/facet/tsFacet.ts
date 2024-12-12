@@ -1,4 +1,4 @@
-import { combineConfig, Facet } from "@codemirror/state";
+import { Facet, combineConfig } from "@codemirror/state";
 import type ts from "@typescript/vfs";
 
 /**
@@ -9,18 +9,18 @@ import type ts from "@typescript/vfs";
  * pull those settings automatically from editor state.
  */
 export const tsFacet = Facet.define<
-  {
-    path: string;
-    env: ts.VirtualTypeScriptEnvironment;
-    keepLegacyLimitationForAutocompletionSymbols?: boolean;
-  },
-  {
-    path: string;
-    env: ts.VirtualTypeScriptEnvironment;
-    keepLegacyLimitationForAutocompletionSymbols?: boolean;
-  } | null
+	{
+		path: string;
+		env: ts.VirtualTypeScriptEnvironment;
+		keepLegacyLimitationForAutocompletionSymbols?: boolean;
+	},
+	{
+		path: string;
+		env: ts.VirtualTypeScriptEnvironment;
+		keepLegacyLimitationForAutocompletionSymbols?: boolean;
+	} | null
 >({
-  combine(configs) {
-    return combineConfig(configs, {});
-  },
+	combine(configs) {
+		return combineConfig(configs, {});
+	},
 });
