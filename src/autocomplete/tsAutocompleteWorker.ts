@@ -12,7 +12,7 @@ import { AutocompleteOptions } from "./types.js";
  * the TypeScript environment in a web worker.
  */
 export function tsAutocompleteWorker(
-  opts: AutocompleteOptions,
+  opts: AutocompleteOptions = {},
 ): CompletionSource {
   return async (
     context: CompletionContext,

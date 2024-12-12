@@ -62,6 +62,16 @@ increment('not a number');`,
   });
 })();
 
+function renderDisplayParts(dp: ts.SymbolDisplayPart[]) {
+  const div = document.createElement("div");
+  for (const part of dp) {
+    const span = div.appendChild(document.createElement("span"));
+    span.className = `quick-info-${part.kind}`;
+    span.innerText = part.text;
+  }
+  return div;
+}
+
 (async () => {
   const path = "index.ts";
 
@@ -90,7 +100,28 @@ increment('not a number');`,
       tsSyncWorker(),
       tsLinterWorker(),
       autocompletion({
-        override: [tsAutocompleteWorker()],
+        override: [
+          tsAutocompleteWorker({
+            renderAutocomplete(raw) {
+              return () => {
+                const div = document.createElement("div");
+                if (raw.documentation) {
+                  const description = div.appendChild(
+                    document.createElement("div"),
+                  );
+                  description.appendChild(
+                    renderDisplayParts(raw.documentation),
+                  );
+                }
+                if (raw?.displayParts) {
+                  const dp = div.appendChild(document.createElement("div"));
+                  dp.appendChild(renderDisplayParts(raw.displayParts));
+                }
+                return { dom: div };
+              };
+            },
+          }),
+        ],
       }),
       tsHoverWorker(),
     ],
