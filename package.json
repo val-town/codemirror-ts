@@ -22,13 +22,15 @@
 	"peerDependencies": {
 		"@codemirror/autocomplete": "^6",
 		"@codemirror/lint": "^6",
-		"@codemirror/view": "^6",
-		"@codemirror/state": "^6"
+		"@codemirror/state": "^6",
+		"@codemirror/view": "^6"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
 		"@codemirror/lang-javascript": "^6.2.2",
+		"@types/node": "^22.10.2",
 		"@typescript/vfs": "^1.6.0",
+		"@vitest/coverage-v8": "^2.1.8",
 		"codemirror": "^6",
 		"comlink": "^4.4.2",
 		"tshy": "^3.0.2",
