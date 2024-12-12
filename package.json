@@ -7,6 +7,7 @@
 	"scripts": {
 		"prepare": "tsc",
 		"dev": "vite",
+		"typecheck": "tsc --noEmit",
 		"test": "vitest run",
 		"test:watch": "vitest",
 		"build": "vite build"
@@ -62,5 +63,7 @@
 	"engines": {
 		"node": "*"
 	},
-	"module": "./dist/esm/index.js"
+	"module": "./dist/esm/index.js",
+	"nx": {}
 }
+
