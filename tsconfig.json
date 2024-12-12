@@ -14,7 +14,10 @@
     "sourceMap": true,
     "strict": true,
     "target": "es2022",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "outDir": "./dist"
   },
-  "exclude": ["./demo"]
+  "exclude": [
+    "./demo"
+  ]
 }
