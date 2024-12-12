@@ -2,7 +2,6 @@
 	"name": "@valtown/codemirror-ts",
 	"version": "2.3.0",
 	"description": "codemirror extensions for typescript",
-	"main": "./dist/commonjs/index.js",
 	"sideEffects": false,
 	"scripts": {
 		"prepare": "tsc",
@@ -36,35 +35,26 @@
 		"vite": "^6.0.3",
 		"vitest": "^2.1.8"
 	},
-	"files": ["dist", "src"],
+	"files": ["dist"],
 	"exports": {
 		"./package.json": "./package.json",
 		".": {
 			"import": {
-				"types": "./dist/esm/index.d.ts",
-				"default": "./dist/esm/index.js"
-			},
-			"require": {
-				"types": "./dist/commonjs/index.d.ts",
-				"default": "./dist/commonjs/index.js"
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
 			}
 		},
 		"./worker": {
 			"import": {
-				"types": "./dist/esm/worker.d.ts",
-				"default": "./dist/esm/worker.js"
-			},
-			"require": {
-				"types": "./dist/commonjs/worker.d.ts",
-				"default": "./dist/commonjs/worker.js"
+				"types": "./dist/worker.d.ts",
+				"default": "./dist/worker.js"
 			}
 		}
 	},
-	"types": "./dist/commonjs/index.d.ts",
+	"types": "./dist/index.d.ts",
 	"type": "module",
 	"engines": {
 		"node": "*"
 	},
-	"module": "./dist/esm/index.js",
-	"nx": {}
+	"module": "./dist/index.js"
 }
