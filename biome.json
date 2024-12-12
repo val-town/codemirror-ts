@@ -22,6 +22,9 @@
 			"recommended": true,
 			"style": {
 				"noNonNullAssertion": "off"
+			},
+			"suspicious": {
+				"noConsole": "error"
 			}
 		}
 	},
