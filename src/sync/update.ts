@@ -1,4 +1,4 @@
-import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
+import type { VirtualTypeScriptEnvironment } from "@typescript/vfs";
 
 /**
  * In TypeScript, updates are not like PUTs, you
@@ -7,13 +7,13 @@ import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
  * This method lets us treat the two as the same.
  */
 export function createOrUpdateFile(
-  env: VirtualTypeScriptEnvironment,
-  path: string,
-  code: string,
+	env: VirtualTypeScriptEnvironment,
+	path: string,
+	code: string,
 ): void {
-  if (!env.getSourceFile(path)) {
-    env.createFile(path, code);
-  } else {
-    env.updateFile(path, code);
-  }
+	if (!env.getSourceFile(path)) {
+		env.createFile(path, code);
+	} else {
+		env.updateFile(path, code);
+	}
 }

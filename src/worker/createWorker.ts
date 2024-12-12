@@ -1,10 +1,10 @@
-import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
-import { createOrUpdateFile } from "../sync/update.js";
-import { getLints } from "../lint/getLints.js";
-import { type CompletionContext } from "@codemirror/autocomplete";
+import type { CompletionContext } from "@codemirror/autocomplete";
+import type { VirtualTypeScriptEnvironment } from "@typescript/vfs";
+import type { Remote } from "comlink";
 import { getAutocompletion } from "../autocomplete/getAutocompletion.js";
 import { getHover } from "../hover/getHover.js";
-import { type Remote } from "comlink";
+import { getLints } from "../lint/getLints.js";
+import { createOrUpdateFile } from "../sync/update.js";
 
 /**
  * The shape of the output of something like
@@ -27,46 +27,46 @@ export type WorkerShape = Remote<ReturnType<typeof createWorker>>;
  * passed to `Comlink.expose`.
  */
 export function createWorker(
-  initializer: () =>
-    | VirtualTypeScriptEnvironment
-    | Promise<VirtualTypeScriptEnvironment>,
+	initializer: () =>
+		| VirtualTypeScriptEnvironment
+		| Promise<VirtualTypeScriptEnvironment>,
 ) {
-  let env: VirtualTypeScriptEnvironment;
+	let env: VirtualTypeScriptEnvironment;
 
-  return {
-    async initialize() {
-      env = await initializer();
-    },
-    updateFile({ path, code }: { path: string; code: string }) {
-      if (!env) return;
-      createOrUpdateFile(env, path, code);
-    },
-    getLints({
-      path,
-      diagnosticCodesToIgnore,
-    }: {
-      path: string;
-      diagnosticCodesToIgnore: number[];
-    }) {
-      if (!env) return [];
-      return getLints({ env, path, diagnosticCodesToIgnore });
-    },
-    getAutocompletion({
-      path,
-      context,
-    }: {
-      path: string;
-      context: Pick<CompletionContext, "pos" | "explicit">;
-    }) {
-      if (!env) return null;
-      return getAutocompletion({ env, path, context });
-    },
-    getHover({ path, pos }: { path: string; pos: number }) {
-      if (!env) return;
-      return getHover({ env, path, pos });
-    },
-    getEnv() {
-      return env;
-    },
-  };
+	return {
+		async initialize() {
+			env = await initializer();
+		},
+		updateFile({ path, code }: { path: string; code: string }) {
+			if (!env) return;
+			createOrUpdateFile(env, path, code);
+		},
+		getLints({
+			path,
+			diagnosticCodesToIgnore,
+		}: {
+			path: string;
+			diagnosticCodesToIgnore: number[];
+		}) {
+			if (!env) return [];
+			return getLints({ env, path, diagnosticCodesToIgnore });
+		},
+		getAutocompletion({
+			path,
+			context,
+		}: {
+			path: string;
+			context: Pick<CompletionContext, "pos" | "explicit">;
+		}) {
+			if (!env) return null;
+			return getAutocompletion({ env, path, context });
+		},
+		getHover({ path, pos }: { path: string; pos: number }) {
+			if (!env) return;
+			return getHover({ env, path, pos });
+		},
+		getEnv() {
+			return env;
+		},
+	};
 }

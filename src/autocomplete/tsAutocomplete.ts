@@ -1,11 +1,11 @@
 import type {
-  CompletionContext,
-  CompletionResult,
-  CompletionSource,
+	CompletionContext,
+	CompletionResult,
+	CompletionSource,
 } from "@codemirror/autocomplete";
-import { getAutocompletion } from "./getAutocompletion.js";
 import { tsFacet } from "../facet/tsFacet.js";
 import { deserializeCompletions } from "./deserializeCompletions.js";
+import { getAutocompletion } from "./getAutocompletion.js";
 
 /**
  * Create a `CompletionSource` that queries
@@ -13,16 +13,16 @@ import { deserializeCompletions } from "./deserializeCompletions.js";
  * at this character.
  */
 export function tsAutocomplete(): CompletionSource {
-  return async (
-    context: CompletionContext,
-  ): Promise<CompletionResult | null> => {
-    const config = context.state.facet(tsFacet);
-    if (!config?.env) return null;
-    return deserializeCompletions(
-      await getAutocompletion({
-        ...config,
-        context,
-      }),
-    );
-  };
+	return async (
+		context: CompletionContext,
+	): Promise<CompletionResult | null> => {
+		const config = context.state.facet(tsFacet);
+		if (!config?.env) return null;
+		return deserializeCompletions(
+			await getAutocompletion({
+				...config,
+				context,
+			}),
+		);
+	};
 }
