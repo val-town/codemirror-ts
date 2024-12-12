@@ -1,8 +1,14 @@
 {
+	"$schema": "https://json.schemastore.org/package.json",
 	"name": "@valtown/codemirror-ts",
 	"version": "3.0.0-0",
 	"description": "codemirror extensions for typescript",
 	"sideEffects": false,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/val-town/val.town"
+	},
+	"homepage": "https://github.com/val-town/val.town",
 	"scripts": {
 		"prepare": "tsc",
 		"dev": "vite",
@@ -12,11 +18,7 @@
 		"test:watch": "vitest",
 		"build": "vite build"
 	},
-	"keywords": [
-		"codemirror",
-		"typescript",
-		"ts"
-	],
+	"keywords": ["codemirror", "typescript", "ts"],
 	"author": "Val Town",
 	"license": "ISC",
 	"peerDependencies": {
@@ -39,9 +41,7 @@
 		"vite": "^6.0.3",
 		"vitest": "^2.1.8"
 	},
-	"files": [
-		"dist"
-	],
+	"files": ["dist"],
 	"exports": {
 		"./package.json": "./package.json",
 		".": {
