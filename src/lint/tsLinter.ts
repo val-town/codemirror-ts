@@ -9,15 +9,15 @@ import { getLints } from "./getLints.js";
  * to the same data.
  */
 export function tsLinter({
-	diagnosticCodesToIgnore,
+  diagnosticCodesToIgnore,
 }: { diagnosticCodesToIgnore?: number[] } = {}) {
-	return linter(async (view): Promise<readonly Diagnostic[]> => {
-		const config = view.state.facet(tsFacet);
-		return config
-			? getLints({
-					...config,
-					diagnosticCodesToIgnore: diagnosticCodesToIgnore || [],
-				})
-			: [];
-	});
+  return linter(async (view): Promise<readonly Diagnostic[]> => {
+    const config = view.state.facet(tsFacet);
+    return config
+      ? getLints({
+          ...config,
+          diagnosticCodesToIgnore: diagnosticCodesToIgnore || [],
+        })
+      : [];
+  });
 }
