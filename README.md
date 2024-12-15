@@ -86,7 +86,7 @@ environment.
 ```ts
 import { tsSync, tsFacet } from "@valtown/codemirror-ts";
 
-let env = "index.ts";
+let path = "index.ts";
 
 let editor = new EditorView({
   extensions: [
