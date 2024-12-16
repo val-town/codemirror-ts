@@ -27,7 +27,7 @@ export function tsLinter({
   return linter(
     async (view): Promise<readonly Diagnostic[]> => {
       const config = view.state.facet(tsFacet);
-      return config
+      return config?.env
         ? getLints({
             ...config,
             diagnosticCodesToIgnore: diagnosticCodesToIgnore || [],
