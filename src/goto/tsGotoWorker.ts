@@ -1,6 +1,12 @@
 import { EditorView } from "@codemirror/view";
 import { type HoverInfo, tsFacetWorker } from "../index.js";
 
+/**
+ * The default setting for the goto handler: this will
+ * 'go to' code defined in the same file, and select it.
+ * Returns true if it handled this case and the code
+ * was in the same file.
+ */
 export function defaultGotoHandler(
   currentPath: string,
   hoverData: HoverInfo,
@@ -8,16 +14,15 @@ export function defaultGotoHandler(
 ) {
   const definition = hoverData?.typeDef?.at(0);
 
-  if (definition) {
-    if (currentPath === definition.fileName) {
-      const tr = view.state.update({
-        selection: {
-          anchor: definition.textSpan.start,
-          head: definition.textSpan.start + definition.textSpan.length,
-        },
-      });
-      view.dispatch(tr);
-    }
+  if (definition && currentPath === definition.fileName) {
+    const tr = view.state.update({
+      selection: {
+        anchor: definition.textSpan.start,
+        head: definition.textSpan.start + definition.textSpan.length,
+      },
+    });
+    view.dispatch(tr);
+    return true;
   }
 }
 
@@ -28,6 +33,9 @@ type ToGoOptions = {
 /**
  * Supports 'going to' a variable definition by meta or
  * ctrl-clicking on it.
+ *
+ * @example
+ * tsGotoWorker()
  */
 export function tsGotoWorker(
   opts: ToGoOptions = { gotoHandler: defaultGotoHandler },
