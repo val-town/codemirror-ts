@@ -32,10 +32,14 @@ export function createWorker(
 		| Promise<VirtualTypeScriptEnvironment>,
 ) {
 	let env: VirtualTypeScriptEnvironment;
+	let initialized = false;
 
 	return {
 		async initialize() {
-			env = await initializer();
+			if (initialized) {
+				env = await initializer();
+				initialized = true;
+			}
 		},
 		updateFile({ path, code }: { path: string; code: string }) {
 			if (!env) return;

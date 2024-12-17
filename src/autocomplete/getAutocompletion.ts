@@ -58,11 +58,7 @@ export async function getAutocompletion({
   if (!completionInfo) return null;
 
   const options = completionInfo.entries
-    .filter(
-      (entry) =>
-        !TS_COMPLETE_BLOCKLIST.includes(entry.kind) &&
-        completionInfo.optionalReplacementSpan?.length,
-    )
+    .filter((entry) => !TS_COMPLETE_BLOCKLIST.includes(entry.kind))
     .map((entry): RawCompletionItem => {
       let type = entry.kind ? String(entry.kind) : undefined;
 
