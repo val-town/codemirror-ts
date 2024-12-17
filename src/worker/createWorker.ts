@@ -27,50 +27,50 @@ export type WorkerShape = Remote<ReturnType<typeof createWorker>>;
  * passed to `Comlink.expose`.
  */
 export function createWorker(
-	initializer: () =>
-		| VirtualTypeScriptEnvironment
-		| Promise<VirtualTypeScriptEnvironment>,
+  initializer: () =>
+    | VirtualTypeScriptEnvironment
+    | Promise<VirtualTypeScriptEnvironment>,
 ) {
-	let env: VirtualTypeScriptEnvironment;
-	let initialized = false;
+  let env: VirtualTypeScriptEnvironment;
+  let initialized = false;
 
-	return {
-		async initialize() {
-			if (initialized) {
-				env = await initializer();
-				initialized = true;
-			}
-		},
-		updateFile({ path, code }: { path: string; code: string }) {
-			if (!env) return;
-			createOrUpdateFile(env, path, code);
-		},
-		getLints({
-			path,
-			diagnosticCodesToIgnore,
-		}: {
-			path: string;
-			diagnosticCodesToIgnore: number[];
-		}) {
-			if (!env) return [];
-			return getLints({ env, path, diagnosticCodesToIgnore });
-		},
-		getAutocompletion({
-			path,
-			context,
-		}: {
-			path: string;
-			context: Pick<CompletionContext, "pos" | "explicit">;
-		}) {
-			if (!env) return null;
-			return getAutocompletion({ env, path, context });
-		},
-		getHover({ path, pos }: { path: string; pos: number }) {
-			if (!env) return;
-			return getHover({ env, path, pos });
-		},
-		getEnv() {
-			return env;
-		},
-	};
+  return {
+    async initialize() {
+      if (!initialized) {
+        env = await initializer();
+        initialized = true;
+      }
+    },
+    updateFile({ path, code }: { path: string; code: string }) {
+      if (!env) return;
+      createOrUpdateFile(env, path, code);
+    },
+    getLints({
+      path,
+      diagnosticCodesToIgnore,
+    }: {
+      path: string;
+      diagnosticCodesToIgnore: number[];
+    }) {
+      if (!env) return [];
+      return getLints({ env, path, diagnosticCodesToIgnore });
+    },
+    getAutocompletion({
+      path,
+      context,
+    }: {
+      path: string;
+      context: Pick<CompletionContext, "pos" | "explicit">;
+    }) {
+      if (!env) return null;
+      return getAutocompletion({ env, path, context });
+    },
+    getHover({ path, pos }: { path: string; pos: number }) {
+      if (!env) return;
+      return getHover({ env, path, pos });
+    },
+    getEnv() {
+      return env;
+    },
+  };
 }
