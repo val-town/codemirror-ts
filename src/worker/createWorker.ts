@@ -20,7 +20,11 @@ import { createOrUpdateFile } from "../sync/update.js";
 export type WorkerShape = Remote<ReturnType<typeof createWorker>>;
 
 const defaultWorkerOptions = {
-  onFileUpdated(path: string, code: string) {},
+  onFileUpdated(
+    env: VirtualTypeScriptEnvironment,
+    path: string,
+    code: string,
+  ) {},
 };
 
 /**
@@ -49,7 +53,7 @@ export function createWorker(
     updateFile({ path, code }: { path: string; code: string }) {
       if (!env) return;
       if (createOrUpdateFile(env, path, code)) {
-        options.onFileUpdated(path, code);
+        options.onFileUpdated(env, path, code);
       }
     },
     getLints({
