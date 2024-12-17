@@ -1,20 +1,22 @@
 {
-  "compilerOptions": {
-    "declaration": true,
-    "declarationMap": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "inlineSources": true,
-    "jsx": "react",
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "noUncheckedIndexedAccess": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "strict": true,
-    "target": "es2022",
-    "rootDir": "./src"
-  },
-  "exclude": ["./demo"]
+	"compilerOptions": {
+		"declaration": true,
+		"declarationMap": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"inlineSources": true,
+		"jsx": "react",
+		"module": "nodenext",
+		"moduleResolution": "nodenext",
+		"noUncheckedIndexedAccess": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"strict": true,
+		"target": "es2022",
+		"rootDir": "./src",
+		"outDir": "./dist"
+	},
+	"include": ["./src"],
+	"exclude": ["./demo", "./src/**/*.test.ts"]
 }

@@ -1,5 +1,5 @@
+import type { Diagnostic } from "@codemirror/lint";
 import ts from "typescript";
-import { type Diagnostic } from "@codemirror/lint";
 
 /**
  * TypeScript has a set of diagnostic categories,
@@ -7,22 +7,22 @@ import { type Diagnostic } from "@codemirror/lint";
  * Here, we do the mapping.
  */
 export function tsCategoryToSeverity(
-  diagnostic: Pick<ts.DiagnosticWithLocation, "category" | "code">,
+	diagnostic: Pick<ts.DiagnosticWithLocation, "category" | "code">,
 ): Diagnostic["severity"] {
-  if (diagnostic.code === 7027) {
-    // Unreachable code detected
-    return "warning";
-  }
-  switch (diagnostic.category) {
-    case ts.DiagnosticCategory.Error:
-      return "error";
-    case ts.DiagnosticCategory.Message:
-      return "info";
-    case ts.DiagnosticCategory.Warning:
-      return "warning";
-    case ts.DiagnosticCategory.Suggestion:
-      return "info";
-  }
+	if (diagnostic.code === 7027) {
+		// Unreachable code detected
+		return "warning";
+	}
+	switch (diagnostic.category) {
+		case ts.DiagnosticCategory.Error:
+			return "error";
+		case ts.DiagnosticCategory.Message:
+			return "info";
+		case ts.DiagnosticCategory.Warning:
+			return "warning";
+		case ts.DiagnosticCategory.Suggestion:
+			return "info";
+	}
 }
 
 /**
@@ -31,13 +31,13 @@ export function tsCategoryToSeverity(
  * do.
  */
 export function isDiagnosticWithLocation(
-  diagnostic: ts.Diagnostic,
+	diagnostic: ts.Diagnostic,
 ): diagnostic is ts.DiagnosticWithLocation {
-  return !!(
-    diagnostic.file &&
-    typeof diagnostic.start === "number" &&
-    typeof diagnostic.length === "number"
-  );
+	return !!(
+		diagnostic.file &&
+		typeof diagnostic.start === "number" &&
+		typeof diagnostic.length === "number"
+	);
 }
 
 /**
@@ -47,13 +47,13 @@ export function isDiagnosticWithLocation(
  * to get a string, regardless of which case we're in.
  */
 export function tsDiagnosticMessage(
-  diagnostic: Pick<ts.Diagnostic, "messageText">,
+	diagnostic: Pick<ts.Diagnostic, "messageText">,
 ): string {
-  if (typeof diagnostic.messageText === "string") {
-    return diagnostic.messageText;
-  }
-  // TODO: go through linked list
-  return diagnostic.messageText.messageText;
+	if (typeof diagnostic.messageText === "string") {
+		return diagnostic.messageText;
+	}
+	// TODO: go through linked list
+	return diagnostic.messageText.messageText;
 }
 
 /**
@@ -62,17 +62,17 @@ export function tsDiagnosticMessage(
  * from one to the other.
  */
 export function convertTSDiagnosticToCM(
-  d: ts.DiagnosticWithLocation,
+	d: ts.DiagnosticWithLocation,
 ): Diagnostic {
-  // We add some code at the end of the document, but we can't have a
-  // diagnostic in an invalid range
-  const start = d.start;
-  const message = tsDiagnosticMessage(d);
+	// We add some code at the end of the document, but we can't have a
+	// diagnostic in an invalid range
+	const start = d.start;
+	const message = tsDiagnosticMessage(d);
 
-  return {
-    from: start,
-    to: start + d.length,
-    message: message,
-    severity: tsCategoryToSeverity(d),
-  };
+	return {
+		from: start,
+		to: start + d.length,
+		message: message,
+		severity: tsCategoryToSeverity(d),
+	};
 }

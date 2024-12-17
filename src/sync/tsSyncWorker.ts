@@ -14,7 +14,7 @@ export function tsSyncWorker() {
   let first = true;
   return EditorView.updateListener.of((update) => {
     const config = update.view.state.facet(tsFacetWorker);
-    if (!config) return;
+    if (!config?.worker) return;
     if (!update.docChanged && !first) return;
     first = false;
 

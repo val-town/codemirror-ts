@@ -1,11 +1,7 @@
-import type {
-  CompletionContext,
-  Completion,
-  CompletionResult,
-} from "@codemirror/autocomplete";
+import type { CompletionContext } from "@codemirror/autocomplete";
+import type { VirtualTypeScriptEnvironment } from "@typescript/vfs";
 import ts from "typescript";
-import { type VirtualTypeScriptEnvironment } from "@typescript/vfs";
-import { AUTOCOMPLETION_SYMBOLS } from "./symbols.js";
+import type { RawCompletion, RawCompletionItem } from "../types.js";
 import { DEFAULT_CODEMIRROR_TYPE_ICONS } from "./icons.js";
 import { matchBefore } from "./matchBefore.js";
 
@@ -13,21 +9,26 @@ const TS_COMPLETE_BLOCKLIST: ts.ScriptElementKind[] = [
   ts.ScriptElementKind.warning,
 ];
 
+export interface AutocompletionInfo {
+  start: number;
+  end: number;
+  typeDef: readonly ts.DefinitionInfo[] | undefined;
+  quickInfo: ts.QuickInfo | undefined;
+}
+
 export async function getAutocompletion({
   env,
   path,
   context,
-  keepLegacyLimitationForAutocompletionSymbols = true,
 }: {
   env: VirtualTypeScriptEnvironment;
   path: string;
-  keepLegacyLimitationForAutocompletionSymbols?: boolean;
   /**
    * Allow this to be a subset of the full CompletionContext
    * object, because the raw object isn't serializable.
    */
   context: Pick<CompletionContext, "pos" | "explicit">;
-}): Promise<CompletionResult | null> {
+}): Promise<RawCompletion | null> {
   const { pos, explicit } = context;
   const rawContents = env.getSourceFile(path)?.getFullText();
 
@@ -45,7 +46,10 @@ export async function getAutocompletion({
   const completionInfo = env.languageService.getCompletionsAtPosition(
     path,
     pos,
-    {},
+    {
+      includeCompletionsForModuleExports: true,
+      includeCompletionsForImportStatements: true,
+    },
     {},
   );
 
@@ -54,15 +58,8 @@ export async function getAutocompletion({
   if (!completionInfo) return null;
 
   const options = completionInfo.entries
-    .filter(
-      (entry) =>
-        !TS_COMPLETE_BLOCKLIST.includes(entry.kind) &&
-        (entry.sortText < "15" ||
-          (completionInfo.optionalReplacementSpan?.length &&
-            (!keepLegacyLimitationForAutocompletionSymbols || AUTOCOMPLETION_SYMBOLS.includes(entry.name)))),
-    )
-    .map((entry): Completion => {
-      const boost = -Number(entry.sortText) || 0;
+    .filter((entry) => !TS_COMPLETE_BLOCKLIST.includes(entry.kind))
+    .map((entry): RawCompletionItem => {
       let type = entry.kind ? String(entry.kind) : undefined;
 
       if (type === "member") type = "property";
@@ -71,10 +68,23 @@ export async function getAutocompletion({
         type = undefined;
       }
 
+      const details = env.languageService.getCompletionEntryDetails(
+        path,
+        pos,
+        entry.name,
+        {},
+        entry.source,
+        {},
+        entry.data,
+      );
+
       return {
         label: entry.name,
+        codeActions: details?.codeActions,
+        displayParts: details?.displayParts ?? [],
+        documentation: details?.documentation,
+        tags: details?.tags,
         type,
-        boost,
       };
     });
 
