@@ -19,6 +19,10 @@ import { createOrUpdateFile } from "../sync/update.js";
  */
 export type WorkerShape = Remote<ReturnType<typeof createWorker>>;
 
+const defaultWorkerOptions = {
+  onFileUpdated(path: string, code: string) {},
+};
+
 /**
  * Create a worker with `WorkerShape`, given an initializer
  * method. You might want to customize how your TypeScript
@@ -30,6 +34,7 @@ export function createWorker(
   initializer: () =>
     | VirtualTypeScriptEnvironment
     | Promise<VirtualTypeScriptEnvironment>,
+  options: typeof defaultWorkerOptions = defaultWorkerOptions,
 ) {
   let env: VirtualTypeScriptEnvironment;
   let initialized = false;
@@ -43,7 +48,9 @@ export function createWorker(
     },
     updateFile({ path, code }: { path: string; code: string }) {
       if (!env) return;
-      createOrUpdateFile(env, path, code);
+      if (createOrUpdateFile(env, path, code)) {
+        options.onFileUpdated(path, code);
+      }
     },
     getLints({
       path,
