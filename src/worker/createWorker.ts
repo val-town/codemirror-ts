@@ -18,9 +18,10 @@ import { createOrUpdateFile } from "../sync/update.js";
  * for casting.
  */
 export type WorkerShape = Remote<ReturnType<typeof createWorker>>;
+type Promisable<T> = T | PromiseLike<T>;
 
 interface InitializerOptions {
-  env: VirtualTypeScriptEnvironment | Promise<VirtualTypeScriptEnvironment>;
+  env: Promisable<VirtualTypeScriptEnvironment>;
   onFileUpdated?: (
     env: VirtualTypeScriptEnvironment,
     path: string,
@@ -35,13 +36,15 @@ interface InitializerOptions {
  * of that: this then gives you an object that can be
  * passed to `Comlink.expose`.
  */
-export function createWorker(options: InitializerOptions) {
-  let env: VirtualTypeScriptEnvironment;
+export function createWorker(_options: Promisable<InitializerOptions>) {
   let initialized = false;
+  let env: VirtualTypeScriptEnvironment;
+  let options: InitializerOptions;
 
   return {
     async initialize() {
       if (!initialized) {
+        options = await _options;
         env = await options.env;
         initialized = true;
       }
