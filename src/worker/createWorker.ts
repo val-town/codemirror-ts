@@ -19,13 +19,14 @@ import { createOrUpdateFile } from "../sync/update.js";
  */
 export type WorkerShape = Remote<ReturnType<typeof createWorker>>;
 
-const defaultWorkerOptions = {
-  onFileUpdated(
+interface InitializerOptions {
+  env: VirtualTypeScriptEnvironment | Promise<VirtualTypeScriptEnvironment>;
+  onFileUpdated?: (
     env: VirtualTypeScriptEnvironment,
     path: string,
     code: string,
-  ) {},
-};
+  ) => unknown;
+}
 
 /**
  * Create a worker with `WorkerShape`, given an initializer
@@ -34,26 +35,21 @@ const defaultWorkerOptions = {
  * of that: this then gives you an object that can be
  * passed to `Comlink.expose`.
  */
-export function createWorker(
-  initializer: () =>
-    | VirtualTypeScriptEnvironment
-    | Promise<VirtualTypeScriptEnvironment>,
-  options: typeof defaultWorkerOptions = defaultWorkerOptions,
-) {
+export function createWorker(options: InitializerOptions) {
   let env: VirtualTypeScriptEnvironment;
   let initialized = false;
 
   return {
     async initialize() {
       if (!initialized) {
-        env = await initializer();
+        env = await options.env;
         initialized = true;
       }
     },
     updateFile({ path, code }: { path: string; code: string }) {
       if (!env) return;
       if (createOrUpdateFile(env, path, code)) {
-        options.onFileUpdated(env, path, code);
+        options.onFileUpdated?.(env, path, code);
       }
     },
     getLints({
