@@ -7,13 +7,18 @@ import type { VirtualTypeScriptEnvironment } from "@typescript/vfs";
  * This method lets us treat the two as the same.
  */
 export function createOrUpdateFile(
-	env: VirtualTypeScriptEnvironment,
-	path: string,
-	code: string,
-): void {
-	if (!env.getSourceFile(path)) {
-		env.createFile(path, code);
-	} else {
-		env.updateFile(path, code);
-	}
+  env: VirtualTypeScriptEnvironment,
+  path: string,
+  code: string,
+): boolean {
+  const existing = env.getSourceFile(path);
+
+  if (existing) {
+    if (code === existing.getFullText()) return false;
+    env.updateFile(path, code);
+    return true;
+  }
+
+  env.createFile(path, code);
+  return true;
 }

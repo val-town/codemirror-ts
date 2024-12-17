@@ -18,11 +18,7 @@
 		"test:watch": "vitest",
 		"build": "vite build"
 	},
-	"keywords": [
-		"codemirror",
-		"typescript",
-		"ts"
-	],
+	"keywords": ["codemirror", "typescript", "ts"],
 	"author": "Val Town",
 	"license": "ISC",
 	"peerDependencies": {
@@ -44,9 +40,7 @@
 		"vite": "^6.0.3",
 		"vitest": "^2.1.8"
 	},
-	"files": [
-		"dist"
-	],
+	"files": ["dist"],
 	"exports": {
 		"./package.json": "./package.json",
 		".": {
