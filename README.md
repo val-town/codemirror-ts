@@ -31,6 +31,42 @@ have direct dependencies to:
 Below are recipes for setting up this code - check out the StackBlitz
 demos above if you want easily copy-paste-able code!
 
+## Using External Libraries
+
+To use external libraries like React, Lodash, or D3, you'll need to configure the TypeScript environment with their type definitions. Here are some examples:
+
+```ts
+// Example with React, Lodash, and D3
+const libraries = {
+  "react": "https://cdn.jsdelivr.net/npm/@types/react@18.2.0/index.d.ts",
+  "lodash": "https://cdn.jsdelivr.net/npm/@types/lodash@4.14.195/index.d.ts",
+  "d3": "https://cdn.jsdelivr.net/npm/@types/d3@7.4.0/index.d.ts"
+};
+
+// For main thread usage:
+let editor = new EditorView({
+  extensions: [
+    basicSetup,
+    javascript({
+      typescript: true,
+      jsx: true,
+    }),
+    tsFacet.of({ env, path, libraries }),
+    tsSync(),
+  ],
+  parent: document.querySelector("#editor")
+});
+
+// For worker usage:
+const extensions = [
+  tsFacetWorker.of({ worker, path, libraries }),
+  tsSyncWorker(),
+  // ... other extensions
+];
+```
+
+The `libraries` object maps library names to their TypeScript definition URLs. You can use any TypeScript definition file hosted on CDNs like jsdelivr or unpkg.
+
 ## Setup (main thread)
 
 This is the simplest way to use this code: you'll be running

@@ -16,6 +16,7 @@ export function tsLinterWorker({
       ? config.worker.getLints({
           path: config.path,
           diagnosticCodesToIgnore: diagnosticCodesToIgnore || [],
+          libraries: config.libraries,
         })
       : [];
   });
