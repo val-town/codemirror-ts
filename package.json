@@ -22,6 +22,7 @@
 	"peerDependencies": {
 		"@codemirror/autocomplete": "^6",
 		"@codemirror/lint": "^6",
+		"@codemirror/state": "^6",
 		"@codemirror/view": "^6"
 	},
 	"devDependencies": {
