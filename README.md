@@ -16,6 +16,7 @@ in CodeMirror.
 - Hover hints for types
 - Autocomplete
 - Diagnostics (lints, in CodeMirror's terminology)
+- Go-to definition
 
 ## Peer dependencies
 
@@ -244,6 +245,7 @@ that accept the `worker` instead of `env` as an argument.
     override: [tsAutocompleteWorker()],
   }),
   tsHoverWorker(),
+  tsGotoWorker(),
 ];
 ```
 
@@ -293,6 +295,15 @@ by just passing the properties we need. There may be other solutions
 in the future.
 
 Comlink is [lightweight](https://bundlephobia.com/package/comlink@4.4.1) (4.7kb gzipped).
+
+## Conceptual notes: LSP
+
+This module uses TypeScript’s public APIs to power its functionality:
+it _doesn't_ use the [Language Server Protocol](https://en.wikipedia.org/wiki/Language_Server_Protocol), which is
+a specification developed by Microsoft and intended for functionality like
+this. TypeScript itself does not have a first-party LSP implementation
+and LSP is usually used across a network. Most good TypeScript language
+tooling, like VS Code’s autocompletion, does not use the LSP specification.
 
 ### ❤️ Other great CodeMirror plugins
 
