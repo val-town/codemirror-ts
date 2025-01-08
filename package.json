@@ -34,14 +34,14 @@
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
 		"@codemirror/lang-javascript": "^6.2.2",
-		"@types/node": "^22.10.2",
+		"@types/node": "^22.10.5",
 		"@typescript/vfs": "^1.6.0",
 		"@vitest/coverage-v8": "^2.1.8",
-		"codemirror": "^6",
+		"codemirror": "^6.0.1",
 		"comlink": "^4.4.2",
 		"happy-dom": "^15.11.7",
-		"typescript": "^5.7.2",
-		"vite": "^6.0.3",
+		"typescript": "^5.7.3",
+		"vite": "^6.0.7",
 		"vitest": "^2.1.8"
 	},
 	"files": [
