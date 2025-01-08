@@ -1,6 +1,6 @@
 import { EditorView } from "@codemirror/view";
-import { createOrUpdateFile } from "./update.js";
 import { tsFacet } from "../facet/tsFacet.js";
+import { createOrUpdateFile } from "./update.js";
 
 /**
  * Sync updates from CodeMirror to the TypeScript
@@ -18,9 +18,13 @@ export function tsSync() {
   let first = true;
   return EditorView.updateListener.of((update) => {
     const config = update.view.state.facet(tsFacet);
-    if (!config) return;
+    if (!config?.env) return;
     if (!update.docChanged && !first) return;
     first = false;
-    createOrUpdateFile(config.env, config.path, update.state.doc.toString() || ' ');
+    createOrUpdateFile(
+      config.env,
+      config.path,
+      update.state.doc.toString() || " ",
+    );
   });
 }

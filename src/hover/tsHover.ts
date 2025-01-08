@@ -1,7 +1,7 @@
-import { hoverTooltip, Tooltip } from "@codemirror/view";
-import { getHover } from "./getHover.js";
-import { defaultRenderer, TooltipRenderer } from "./renderTooltip.js";
+import { type Tooltip, hoverTooltip } from "@codemirror/view";
 import { tsFacet } from "../facet/tsFacet.js";
+import { getHover } from "./getHover.js";
+import { type TooltipRenderer, defaultRenderer } from "./renderTooltip.js";
 
 /**
  * This binds the CodeMirror `hoverTooltip` method
@@ -15,7 +15,7 @@ export function tsHover({
 } = {}) {
   return hoverTooltip(async (view, pos): Promise<Tooltip | null> => {
     const config = view.state.facet(tsFacet);
-    if (!config) return null;
+    if (!config?.env) return null;
 
     const hoverData = getHover({
       ...config,

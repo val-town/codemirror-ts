@@ -4,13 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>codemirror-ts demo</title>
+    <meta name='description' content='A set of CodeMirror extensions that give it the powers of TypeScript' />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <link href="./demo.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/missing.css@1.1.3">
+    <link rel="stylesheet" href="demo.css">
   </head>
   <body>
     <main>
@@ -28,16 +30,17 @@
         <li>Autocomplete</li>
         <li>Hover</li>
         <li>Diagnostics</li>
+        <li>Go to definition</li>
       </ul>
-      <h2>Demo</h2>
+      <h2>Demos</h2>
 
       <h3>TypeScript running on the page</h3>
-      <div id="app">
+      <div id="app" class='border'>
         <div id="editor"></div>
       </div>
 
       <h3>TypeScript environment in a web worker</h3>
-      <div id="app">
+      <div id="app" class='border'>
         <div id="editor-worker"></div>
       </div>
     </main>
