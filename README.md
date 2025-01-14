@@ -1,5 +1,8 @@
 # codemirror-ts
 
+
+<a href="https://www.npmjs.com/package/@valtown/codemirror-ts" rel="nofollow"><img src="https://img.shields.io/npm/dw/@valtown/codemirror-ts.svg" alt="npm"></a>
+
 _[Made by val.town](https://www.val.town/), a social website to write and deploy backend services._
 
 On npm as `@valtown/codemirror-ts`
