@@ -34,15 +34,15 @@
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
 		"@codemirror/lang-javascript": "^6.2.2",
-		"@types/node": "^22.10.5",
-		"@typescript/vfs": "^1.6.0",
-		"@vitest/coverage-v8": "^2.1.8",
+		"@types/node": "^22.13.1",
+		"@typescript/vfs": "^1.6.1",
+		"@vitest/coverage-v8": "^2.1.9",
 		"codemirror": "^6.0.1",
 		"comlink": "^4.4.2",
 		"happy-dom": "^15.11.7",
 		"typescript": "^5.7.3",
-		"vite": "^6.0.7",
-		"vitest": "^2.1.8"
+		"vite": "^6.0.11",
+		"vitest": "^2.1.9"
 	},
 	"files": [
 		"dist"
@@ -67,5 +67,8 @@
 	"engines": {
 		"node": "*"
 	},
-	"module": "./dist/index.js"
+	"module": "./dist/index.js",
+	"dependencies": {
+		"@codemirror/language": "^6.10.8"
+	}
 }

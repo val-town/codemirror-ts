@@ -1,5 +1,5 @@
 import { EditorView } from "@codemirror/view";
-import { type HoverInfo, tsFacetWorker } from "../index.js";
+import { type HoverInfo, tsFacet } from "../index.js";
 
 /**
  * The default setting for the goto handler: this will
@@ -37,12 +37,12 @@ type ToGoOptions = {
  * @example
  * tsGotoWorker()
  */
-export function tsGotoWorker(
+export function tsGoto(
 	opts: ToGoOptions = { gotoHandler: defaultGotoHandler },
 ) {
 	return EditorView.domEventHandlers({
 		click: (event, view) => {
-			const config = view.state.facet(tsFacetWorker);
+			const config = view.state.facet(tsFacet);
 			if (!config?.worker || !opts.gotoHandler) return false;
 
 			// TODO: maybe this should be _just_ meta?

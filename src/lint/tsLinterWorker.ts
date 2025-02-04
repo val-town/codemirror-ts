@@ -1,5 +1,5 @@
 import { type Diagnostic, linter } from "@codemirror/lint";
-import { tsFacetWorker } from "../index.js";
+import { tsFacet } from "../index.js";
 
 /**
  * Binds the TypeScript `lint()` method with TypeScript's
@@ -8,15 +8,15 @@ import { tsFacetWorker } from "../index.js";
  * to the same data.
  */
 export function tsLinterWorker({
-  diagnosticCodesToIgnore,
+	diagnosticCodesToIgnore,
 }: { diagnosticCodesToIgnore?: number[] } = {}) {
-  return linter(async (view): Promise<readonly Diagnostic[]> => {
-    const config = view.state.facet(tsFacetWorker);
-    return config?.worker
-      ? config.worker.getLints({
-          path: config.path,
-          diagnosticCodesToIgnore: diagnosticCodesToIgnore || [],
-        })
-      : [];
-  });
+	return linter(async (view): Promise<readonly Diagnostic[]> => {
+		const config = view.state.facet(tsFacet);
+		return config?.worker
+			? config.worker.getLints({
+					path: config.path,
+					diagnosticCodesToIgnore: diagnosticCodesToIgnore || [],
+				})
+			: [];
+	});
 }

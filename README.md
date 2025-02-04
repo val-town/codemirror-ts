@@ -20,6 +20,7 @@ in CodeMirror.
 - Autocomplete
 - Diagnostics (lints, in CodeMirror's terminology)
 - Go-to definition
+- Twoslash support
 
 ## Peer dependencies
 
@@ -110,14 +111,15 @@ that accept the `worker` instead of `env` as an argument.
 
 ```ts
 [
-  tsFacetWorker.of({ worker, path }),
-  tsSyncWorker(),
-  tsLinterWorker(),
+  tsFacet.of({ worker, path }),
+  tsSync(),
+  tsLinter(),
   autocompletion({
-    override: [tsAutocompleteWorker()],
+    override: [tsAutocomplete()],
   }),
-  tsHoverWorker(),
-  tsGotoWorker(),
+  tsHover(),
+  tsGoto(),
+  tsTwoslash(),
 ];
 ```
 
