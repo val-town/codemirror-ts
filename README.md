@@ -35,138 +35,7 @@ have direct dependencies to:
 Below are recipes for setting up this code - check out the StackBlitz
 demos above if you want easily copy-paste-able code!
 
-## Setup (main thread)
-
-This is the simplest way to use this code: you'll be running
-the TypeScript server on the same processing as the rest of the web
-application. To run the TypeScript server in a worker (which can yield
-performance benefits, at the cost of complexity), see the next
-section.
-
-_This is designed to scale up to more complex scenarios, so there
-is some assembly required. We could encapsulate more, but that would
-mean removing important points of control._
-
-1. Create a TypeScript environment.
-
-We don't create a TypeScript environment for you. This you bring, and it probably
-is used for other parts of your application. The simplest setup would be something like this,
-using [@typescript/vfs](https://www.npmjs.com/package/@typescript/vfs):
-
-```ts
-import {
-  createDefaultMapFromCDN,
-  createSystem,
-  createVirtualTypeScriptEnvironment,
-} from "@typescript/vfs";
-
-const fsMap = await createDefaultMapFromCDN(
-  { target: ts.ScriptTarget.ES2022 },
-  "3.7.3",
-  true,
-  ts,
-);
-const system = createSystem(fsMap);
-const compilerOpts = {};
-const env = createVirtualTypeScriptEnvironment(system, [], ts, compilerOpts);
-```
-
-2. Install the facet and the sync extension:
-
-The facet configures the rest of the extensions
-with the right path and environment.
-
-When you make changes in your
-editor, the sync extension mirrors them to the TypeScript environment using
-`createFile` and `updateFile` in the TypeScript compiler.
-
-_Note, also, that we're supplying a path._ These extensions
-use file paths in order to differentiate between different editor
-instances and to allow editors to import & export to & from
-one another. So each extension has a required `path` parameter,
-as well as the `env` parameter which should be your TypeScript
-environment.
-
-```ts
-import { tsSync, tsFacet } from "@valtown/codemirror-ts";
-
-let path = "index.ts";
-
-let editor = new EditorView({
-  extensions: [
-    basicSetup,
-    javascript({
-      typescript: true,
-      jsx: true,
-    }),
-    tsFacet.of({ env, path }),
-    tsSync(),
-  ],
-  parent: document.querySelector("#editor"),
-});
-```
-
-### Linting
-
-The `tsLinter` extension can be initialized
-like this and added to the `extensions` array in the setup
-of your CodeMirror instance.
-
-```ts
-tsLinter();
-```
-
-This uses the [@codemirror/lint](https://codemirror.net/docs/ref/#lint)
-package and grabs diagnostics from the TypeScript environment.
-
-_If you want to modify how lints are handled, you can use
-the `getLints({ env, path })` method and wire it up with
-CodeMirror's linter method yourself._
-
-### Autocompletion
-
-To make it possible to combine different autocompletion
-sources, we expose a [`CompletionSource`](https://codemirror.net/docs/ref/#autocomplete.autocompletion) which you can use with the CodeMirror `autocomplete` method:
-
-```ts
-autocompletion({
-  override: [tsAutocomplete()],
-});
-```
-
-_We expose a lower-level interface to autocompletions with the
-`getAutocompletion({ env, path, context })` method that takes
-a `CompletionContext` parameter._
-
-### Hover
-
-The hover definition can be used like the following:
-
-```ts
-tsHover();
-```
-
-Which automatically uses a default renderer. However, you can
-customize this to your heart's content, and use your web framework
-to render custom UI if you want to, using the `renderTooltip` option.
-
-```ts
-tsHover({
-  renderTooltip: (info: HoverInfo) => {
-    const div = document.createElement("div");
-    if (info.quickInfo?.displayParts) {
-      for (let part of info.quickInfo.displayParts) {
-        const span = div.appendChild(document.createElement("span"));
-        span.className = `quick-info-${part.kind}`;
-        span.innerText = part.text;
-      }
-    }
-    return { dom: div };
-  },
-});
-```
-
-## Setup (worker)
+## Setup
 
 Using a [Worker](https://developer.mozilla.org/en-US/docs/Web/API/Worker), you can
 run TypeScript separately from the rest of your JavaScript, which can make
@@ -304,9 +173,11 @@ Comlink is [lightweight](https://bundlephobia.com/package/comlink@4.4.1) (4.7kb 
 This module uses TypeScript’s public APIs to power its functionality:
 it _doesn't_ use the [Language Server Protocol](https://en.wikipedia.org/wiki/Language_Server_Protocol), which is
 a specification developed by Microsoft and intended for functionality like
-this. TypeScript itself does not have a first-party LSP implementation
+this. [TypeScript itself does not have a first-party LSP implementation](https://github.com/microsoft/TypeScript/issues/39459)
 and LSP is usually used across a network. Most good TypeScript language
 tooling, like VS Code’s autocompletion, does not use the LSP specification.
+Unfortunately, most TypeScript language tooling in other editors is based directly
+off of the VS Code implementation.
 
 ### ❤️ Other great CodeMirror plugins
 
