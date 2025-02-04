@@ -1,71 +1,68 @@
 {
-	"$schema": "https://json.schemastore.org/package.json",
-	"name": "@valtown/codemirror-ts",
-	"version": "3.0.0-9",
-	"description": "codemirror extensions for typescript",
-	"sideEffects": false,
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/val-town/val.town"
-	},
-	"homepage": "https://github.com/val-town/val.town",
-	"scripts": {
-		"prepare": "tsc",
-		"dev": "vite",
-		"typecheck": "tsc --noEmit",
-		"lint": "biome check",
-		"test": "vitest run",
-		"test:watch": "vitest",
-		"build": "vite build"
-	},
-	"keywords": [
-		"codemirror",
-		"typescript",
-		"ts"
-	],
-	"author": "Val Town",
-	"license": "ISC",
-	"peerDependencies": {
-		"@codemirror/autocomplete": "^6",
-		"@codemirror/lint": "^6",
-		"@codemirror/state": "^6",
-		"@codemirror/view": "^6"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^1.9.4",
-		"@codemirror/lang-javascript": "^6.2.2",
-		"@types/node": "^22.10.5",
-		"@typescript/vfs": "^1.6.0",
-		"@vitest/coverage-v8": "^2.1.8",
-		"codemirror": "^6.0.1",
-		"comlink": "^4.4.2",
-		"happy-dom": "^15.11.7",
-		"typescript": "^5.7.3",
-		"vite": "^6.0.7",
-		"vitest": "^2.1.8"
-	},
-	"files": [
-		"dist"
-	],
-	"exports": {
-		"./package.json": "./package.json",
-		".": {
-			"import": {
-				"types": "./dist/index.d.ts",
-				"default": "./dist/index.js"
-			}
-		},
-		"./worker": {
-			"import": {
-				"types": "./dist/worker.d.ts",
-				"default": "./dist/worker.js"
-			}
-		}
-	},
-	"types": "./dist/index.d.ts",
-	"type": "module",
-	"engines": {
-		"node": "*"
-	},
-	"module": "./dist/index.js"
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@valtown/codemirror-ts",
+  "version": "3.0.0-9",
+  "description": "codemirror extensions for typescript",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/val-town/val.town"
+  },
+  "homepage": "https://github.com/val-town/val.town",
+  "scripts": {
+    "prepare": "tsc",
+    "dev": "vite",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "vite build"
+  },
+  "keywords": ["codemirror", "typescript", "ts"],
+  "author": "Val Town",
+  "license": "ISC",
+  "peerDependencies": {
+    "@codemirror/autocomplete": "^6",
+    "@codemirror/lint": "^6",
+    "@codemirror/state": "^6",
+    "@codemirror/view": "^6"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@codemirror/lang-javascript": "^6.2.2",
+    "@types/node": "^22.13.1",
+    "@typescript/vfs": "^1.6.1",
+    "@vitest/coverage-v8": "^2.1.9",
+    "codemirror": "^6.0.1",
+    "comlink": "^4.4.2",
+    "happy-dom": "^15.11.7",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.11",
+    "vitest": "^2.1.9"
+  },
+  "files": ["dist"],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./worker": {
+      "import": {
+        "types": "./dist/worker.d.ts",
+        "default": "./dist/worker.js"
+      }
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "engines": {
+    "node": "*"
+  },
+  "module": "./dist/index.js",
+  "dependencies": {
+    "@codemirror/language": "^6.10.8"
+  }
 }

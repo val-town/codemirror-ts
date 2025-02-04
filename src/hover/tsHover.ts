@@ -1,5 +1,5 @@
 import { type Tooltip, hoverTooltip } from "@codemirror/view";
-import { tsFacetWorker } from "../index.js";
+import { tsFacet } from "../index.js";
 import { type TooltipRenderer, defaultRenderer } from "./renderTooltip.js";
 
 /**
@@ -7,13 +7,13 @@ import { type TooltipRenderer, defaultRenderer } from "./renderTooltip.js";
  * with a code that pulls types and documentation
  * from the TypeScript environment.
  */
-export function tsHoverWorker({
+export function tsHover({
   renderTooltip = defaultRenderer,
 }: {
   renderTooltip?: TooltipRenderer;
 } = {}) {
   return hoverTooltip(async (view, pos): Promise<Tooltip | null> => {
-    const config = view.state.facet(tsFacetWorker);
+    const config = view.state.facet(tsFacet);
     if (!config?.worker) return null;
     const hoverData = await config.worker.getHover({
       path: config.path,

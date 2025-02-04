@@ -21,12 +21,12 @@ export type WorkerShape = Remote<ReturnType<typeof createWorker>>;
 type Promisable<T> = T | PromiseLike<T>;
 
 interface InitializerOptions {
-	env: Promisable<VirtualTypeScriptEnvironment>;
-	onFileUpdated?: (
-		env: VirtualTypeScriptEnvironment,
-		path: string,
-		code: string,
-	) => unknown;
+  env: Promisable<VirtualTypeScriptEnvironment>;
+  onFileUpdated?: (
+    env: VirtualTypeScriptEnvironment,
+    path: string,
+    code: string,
+  ) => unknown;
 }
 
 /**
@@ -37,50 +37,50 @@ interface InitializerOptions {
  * passed to `Comlink.expose`.
  */
 export function createWorker(_options: Promisable<InitializerOptions>) {
-	let initialized = false;
-	let env: VirtualTypeScriptEnvironment;
-	let options: InitializerOptions;
+  let initialized = false;
+  let env: VirtualTypeScriptEnvironment;
+  let options: InitializerOptions;
 
-	return {
-		async initialize() {
-			if (!initialized) {
-				options = await _options;
-				env = await options.env;
-				initialized = true;
-			}
-		},
-		updateFile({ path, code }: { path: string; code: string }) {
-			if (!env) return;
-			if (createOrUpdateFile(env, path, code)) {
-				options.onFileUpdated?.(env, path, code);
-			}
-		},
-		getLints({
-			path,
-			diagnosticCodesToIgnore,
-		}: {
-			path: string;
-			diagnosticCodesToIgnore: number[];
-		}) {
-			if (!env) return [];
-			return getLints({ env, path, diagnosticCodesToIgnore });
-		},
-		getAutocompletion({
-			path,
-			context,
-		}: {
-			path: string;
-			context: Pick<CompletionContext, "pos" | "explicit">;
-		}) {
-			if (!env) return null;
-			return getAutocompletion({ env, path, context });
-		},
-		getHover({ path, pos }: { path: string; pos: number }) {
-			if (!env) return null;
-			return getHover({ env, path, pos });
-		},
-		getEnv() {
-			return env;
-		},
-	};
+  return {
+    async initialize() {
+      if (!initialized) {
+        options = await _options;
+        env = await options.env;
+        initialized = true;
+      }
+    },
+    updateFile({ path, code }: { path: string; code: string }) {
+      if (!env) return;
+      if (createOrUpdateFile(env, path, code)) {
+        options.onFileUpdated?.(env, path, code);
+      }
+    },
+    getLints({
+      path,
+      diagnosticCodesToIgnore,
+    }: {
+      path: string;
+      diagnosticCodesToIgnore: number[];
+    }) {
+      if (!env) return [];
+      return getLints({ env, path, diagnosticCodesToIgnore });
+    },
+    getAutocompletion({
+      path,
+      context,
+    }: {
+      path: string;
+      context: Pick<CompletionContext, "pos" | "explicit">;
+    }) {
+      if (!env) return null;
+      return getAutocompletion({ env, path, context });
+    },
+    getHover({ path, pos }: { path: string; pos: number }) {
+      if (!env) return null;
+      return getHover({ env, path, pos });
+    },
+    getEnv() {
+      return env;
+    },
+  };
 }

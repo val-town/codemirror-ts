@@ -9,11 +9,12 @@ import {
 import ts from "typescript";
 import {
   tsLinterWorker,
-  tsHoverWorker,
-  tsAutocompleteWorker,
-  tsSyncWorker,
-  tsFacetWorker,
-  tsGotoWorker,
+  tsHover,
+  tsAutocomplete,
+  tsSync,
+  tsFacet,
+  tsGoto,
+  tsTwoslash,
 } from "../src/index.js";
 import * as Comlink from "comlink";
 import { WorkerShape } from "../src/worker.js";
@@ -43,6 +44,7 @@ function renderDisplayParts(dp: ts.SymbolDisplayPart[]) {
 
 function increment(num: number) {
   return num + 1;
+  //     ^?
 }
 
 increment('not a number');`,
@@ -52,12 +54,12 @@ increment('not a number');`,
         typescript: true,
         jsx: true,
       }),
-      tsFacetWorker.of({ worker, path }),
-      tsSyncWorker(),
+      tsFacet.of({ worker, path }),
+      tsSync(),
       tsLinterWorker(),
       autocompletion({
         override: [
-          tsAutocompleteWorker({
+          tsAutocomplete({
             renderAutocomplete(raw) {
               return () => {
                 const div = document.createElement("div");
@@ -79,8 +81,9 @@ increment('not a number');`,
           }),
         ],
       }),
-      tsHoverWorker(),
-      tsGotoWorker(),
+      tsHover(),
+      tsGoto(),
+      tsTwoslash(),
     ],
     parent: document.querySelector("#editor-worker")!,
   });

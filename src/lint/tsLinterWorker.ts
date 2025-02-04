@@ -1,5 +1,5 @@
 import { type Diagnostic, linter } from "@codemirror/lint";
-import { tsFacetWorker } from "../index.js";
+import { tsFacet } from "../index.js";
 
 /**
  * Binds the TypeScript `lint()` method with TypeScript's
@@ -11,7 +11,7 @@ export function tsLinterWorker({
   diagnosticCodesToIgnore,
 }: { diagnosticCodesToIgnore?: number[] } = {}) {
   return linter(async (view): Promise<readonly Diagnostic[]> => {
-    const config = view.state.facet(tsFacetWorker);
+    const config = view.state.facet(tsFacet);
     return config?.worker
       ? config.worker.getLints({
           path: config.path,

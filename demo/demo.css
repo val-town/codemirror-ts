@@ -13,3 +13,9 @@
 .quick-info-parameterName {
   color: green;
 }
+
+.cm-twoslash {
+  color: gray;
+  background-color: #eee;
+  padding: 0 0.25em;
+}
