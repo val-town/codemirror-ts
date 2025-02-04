@@ -1,5 +1,5 @@
-import type { AutocompleteRenderer } from "./types.js";
 import { renderDisplayParts } from "../renderDisplayParts.js";
+import type { AutocompleteRenderer } from "./types.js";
 
 /**
  * Default, barebones tooltip renderer. Generates

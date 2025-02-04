@@ -5,16 +5,16 @@
  * of persisting code in the TS enviroment.
  */
 export function getLineAtPosition(code: string, position: number) {
-	// lineStart is the index of line break or zero
-	const from = code.lastIndexOf("\n", position - 1) + 1;
-	let to = code.indexOf("\n", position);
-	if (to === -1) {
-		to = code.length;
-	}
-	const text = code.slice(from, to);
-	return {
-		from,
-		to,
-		text,
-	};
+  // lineStart is the index of line break or zero
+  const from = code.lastIndexOf("\n", position - 1) + 1;
+  let to = code.indexOf("\n", position);
+  if (to === -1) {
+    to = code.length;
+  }
+  const text = code.slice(from, to);
+  return {
+    from,
+    to,
+    text,
+  };
 }

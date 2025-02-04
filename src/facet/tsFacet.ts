@@ -12,18 +12,18 @@ import type { WorkerShape } from "../worker.js";
  * pull those settings automatically from editor state.
  */
 export const tsFacet = Facet.define<
-	{
-		path: string;
-		worker: WorkerShape;
-	},
-	FacetConfig
+  {
+    path: string;
+    worker: WorkerShape;
+  },
+  FacetConfig
 >({
-	combine(configs) {
-		return combineConfig(configs, {});
-	},
+  combine(configs) {
+    return combineConfig(configs, {});
+  },
 });
 
 export type FacetConfig = {
-	path: string;
-	worker: WorkerShape;
+  path: string;
+  worker: WorkerShape;
 } | null;

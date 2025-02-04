@@ -8,26 +8,26 @@ import { type HoverInfo, tsFacet } from "../index.js";
  * was in the same file.
  */
 export function defaultGotoHandler(
-	currentPath: string,
-	hoverData: HoverInfo,
-	view: EditorView,
+  currentPath: string,
+  hoverData: HoverInfo,
+  view: EditorView,
 ) {
-	const definition = hoverData?.typeDef?.at(0);
+  const definition = hoverData?.typeDef?.at(0);
 
-	if (definition && currentPath === definition.fileName) {
-		const tr = view.state.update({
-			selection: {
-				anchor: definition.textSpan.start,
-				head: definition.textSpan.start + definition.textSpan.length,
-			},
-		});
-		view.dispatch(tr);
-		return true;
-	}
+  if (definition && currentPath === definition.fileName) {
+    const tr = view.state.update({
+      selection: {
+        anchor: definition.textSpan.start,
+        head: definition.textSpan.start + definition.textSpan.length,
+      },
+    });
+    view.dispatch(tr);
+    return true;
+  }
 }
 
 type ToGoOptions = {
-	gotoHandler?: typeof defaultGotoHandler;
+  gotoHandler?: typeof defaultGotoHandler;
 };
 
 /**
@@ -38,41 +38,41 @@ type ToGoOptions = {
  * tsGotoWorker()
  */
 export function tsGoto(
-	opts: ToGoOptions = { gotoHandler: defaultGotoHandler },
+  opts: ToGoOptions = { gotoHandler: defaultGotoHandler },
 ) {
-	return EditorView.domEventHandlers({
-		click: (event, view) => {
-			const config = view.state.facet(tsFacet);
-			if (!config?.worker || !opts.gotoHandler) return false;
+  return EditorView.domEventHandlers({
+    click: (event, view) => {
+      const config = view.state.facet(tsFacet);
+      if (!config?.worker || !opts.gotoHandler) return false;
 
-			// TODO: maybe this should be _just_ meta?
-			// I think ctrl should probably be preserved.
-			// Need to check what VS Code does
-			if (!(event.metaKey || event.ctrlKey)) return false;
+      // TODO: maybe this should be _just_ meta?
+      // I think ctrl should probably be preserved.
+      // Need to check what VS Code does
+      if (!(event.metaKey || event.ctrlKey)) return false;
 
-			const pos = view.posAtCoords({
-				x: event.clientX,
-				y: event.clientY,
-			});
+      const pos = view.posAtCoords({
+        x: event.clientX,
+        y: event.clientY,
+      });
 
-			if (pos === null) return;
+      if (pos === null) return;
 
-			config.worker
-				.getHover({
-					path: config.path,
-					pos,
-				})
-				.then((hoverData) => {
-					// In reality, we enforced that opts.gotoHandler
-					// is non-nullable earlier, but TypeScript knows
-					// that in this callback, that theoretically could
-					// have changed.
-					if (hoverData && opts.gotoHandler) {
-						opts.gotoHandler(config.path, hoverData, view);
-					}
-				});
+      config.worker
+        .getHover({
+          path: config.path,
+          pos,
+        })
+        .then((hoverData) => {
+          // In reality, we enforced that opts.gotoHandler
+          // is non-nullable earlier, but TypeScript knows
+          // that in this callback, that theoretically could
+          // have changed.
+          if (hoverData && opts.gotoHandler) {
+            opts.gotoHandler(config.path, hoverData, view);
+          }
+        });
 
-			return true;
-		},
-	});
+      return true;
+    },
+  });
 }

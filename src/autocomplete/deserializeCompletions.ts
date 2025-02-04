@@ -7,8 +7,8 @@ import type { TransactionSpec } from "@codemirror/state";
 import type { EditorView } from "codemirror";
 import type ts from "typescript";
 import type { RawCompletion, RawCompletionItem } from "../types.js";
-import type { AutocompleteOptions } from "./types.js";
 import { defaultAutocompleteRenderer } from "./renderAutocomplete.js";
+import type { AutocompleteOptions } from "./types.js";
 
 export function deserializeCompletions(
   raw: RawCompletion | null,

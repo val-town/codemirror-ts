@@ -8,14 +8,14 @@ import type ts from "typescript";
  * on the other side.
  */
 export type RawCompletionItem = {
-	label: string;
-	type: Completion["type"];
+  label: string;
+  type: Completion["type"];
 } & Pick<
-	ts.CompletionEntryDetails,
-	"codeActions" | "displayParts" | "documentation" | "tags"
+  ts.CompletionEntryDetails,
+  "codeActions" | "displayParts" | "documentation" | "tags"
 >;
 
 export type RawCompletion = {
-	from: number;
-	options: RawCompletionItem[];
+  from: number;
+  options: RawCompletionItem[];
 };

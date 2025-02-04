@@ -3,20 +3,20 @@ import { getEnv } from "../../test/env.js";
 import { getLints } from "./getLints.js";
 
 describe("getLints", () => {
-	it("getting a lint", async () => {
-		const env = getEnv();
+  it("getting a lint", async () => {
+    const env = getEnv();
 
-		const name = "/foo.ts";
-		const content = "const x = 'hi'.";
-		env.createFile(name, content);
+    const name = "/foo.ts";
+    const content = "const x = 'hi'.";
+    env.createFile(name, content);
 
-		const lints = getLints({
-			env,
-			path: name,
-			diagnosticCodesToIgnore: [],
-		});
+    const lints = getLints({
+      env,
+      path: name,
+      diagnosticCodesToIgnore: [],
+    });
 
-		expect(lints).toMatchInlineSnapshot(`
+    expect(lints).toMatchInlineSnapshot(`
       [
         {
           "from": 15,
@@ -26,5 +26,5 @@ describe("getLints", () => {
         },
       ]
     `);
-	});
+  });
 });
