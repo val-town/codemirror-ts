@@ -8,60 +8,15 @@ import {
 } from "@typescript/vfs";
 import ts from "typescript";
 import {
-  tsLinter,
   tsLinterWorker,
-  tsHover,
   tsHoverWorker,
-  tsAutocomplete,
   tsAutocompleteWorker,
-  tsSync,
   tsSyncWorker,
-  tsFacet,
   tsFacetWorker,
   tsGotoWorker,
 } from "../src/index.js";
 import * as Comlink from "comlink";
 import { WorkerShape } from "../src/worker.js";
-
-(async () => {
-  const fsMap = await createDefaultMapFromCDN(
-    { target: ts.ScriptTarget.ES2022 },
-    ts.version,
-    true,
-    ts,
-  );
-  const system = createSystem(fsMap);
-  const env = createVirtualTypeScriptEnvironment(system, [], ts, {
-    lib: ["ES2022"],
-  });
-
-  const path = "index.ts";
-
-  let editor = new EditorView({
-    doc: `let hasAnError: string = 10;
-
-function increment(num: number) {
-  return num + 1;
-}
-
-increment('not a number');`,
-    extensions: [
-      basicSetup,
-      javascript({
-        typescript: true,
-        jsx: true,
-      }),
-      tsFacet.of({ env, path }),
-      tsSync(),
-      tsLinter(),
-      autocompletion({
-        override: [tsAutocomplete()],
-      }),
-      tsHover(),
-    ],
-    parent: document.querySelector("#editor")!,
-  });
-})();
 
 function renderDisplayParts(dp: ts.SymbolDisplayPart[]) {
   const div = document.createElement("div");
