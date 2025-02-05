@@ -57,13 +57,11 @@ export function createWorker(_options: Promisable<InitializerOptions>) {
     },
     getLints({
       path,
-      diagnosticCodesToIgnore,
     }: {
       path: string;
-      diagnosticCodesToIgnore: number[];
     }) {
       if (!env) return [];
-      return getLints({ env, path, diagnosticCodesToIgnore });
+      return getLints({ env, path });
     },
     getAutocompletion({
       path,

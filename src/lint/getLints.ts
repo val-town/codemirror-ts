@@ -12,11 +12,9 @@ import { convertTSDiagnosticToCM, isDiagnosticWithLocation } from "./utils.js";
 export function getLints({
   env,
   path,
-  diagnosticCodesToIgnore,
 }: {
   env: VirtualTypeScriptEnvironment;
   path: string;
-  diagnosticCodesToIgnore: number[];
 }) {
   // Don't crash if the relevant file isn't created yet.
   const exists = env.getSourceFile(path);
@@ -27,8 +25,7 @@ export function getLints({
 
   const diagnostics = [...syntaticDiagnostics, ...semanticDiagnostics].filter(
     (diagnostic): diagnostic is DiagnosticWithLocation =>
-      isDiagnosticWithLocation(diagnostic) &&
-      !diagnosticCodesToIgnore.includes(diagnostic.code),
+      isDiagnosticWithLocation(diagnostic),
   );
 
   return diagnostics.map(convertTSDiagnosticToCM);
