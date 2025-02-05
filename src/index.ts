@@ -4,7 +4,7 @@ export * from "./autocomplete/tsAutocomplete.js";
 export * from "./autocomplete/getAutocompletion.js";
 export * from "./autocomplete/types.js";
 
-export * from "./lint/tsLinterWorker.js";
+export * from "./lint/tsLinter.js";
 export * from "./lint/getLints.js";
 
 export * from "./hover/tsHover.js";

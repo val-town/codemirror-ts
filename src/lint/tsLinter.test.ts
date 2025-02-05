@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { tsLinterWorker } from "./tsLinterWorker.js";
+import { tsLinter } from "./tsLinter.js";
 
 describe("tsLinter", () => {
   it("base", async () => {
-    expect(tsLinterWorker()).toBeTruthy();
+    expect(tsLinter()).toBeTruthy();
   });
 });

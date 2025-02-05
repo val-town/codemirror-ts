@@ -7,7 +7,7 @@ import { tsFacet } from "../index.js";
  * the `getLints` method for a lower-level interface
  * to the same data.
  */
-export function tsLinterWorker({
+export function tsLinter({
   diagnosticCodesToIgnore,
 }: { diagnosticCodesToIgnore?: number[] } = {}) {
   return linter(async (view): Promise<readonly Diagnostic[]> => {
