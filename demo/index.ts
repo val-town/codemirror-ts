@@ -8,7 +8,7 @@ import {
 } from "@typescript/vfs";
 import ts from "typescript";
 import {
-  tsLinterWorker,
+  tsLinter,
   tsHover,
   tsAutocomplete,
   tsSync,
@@ -56,7 +56,7 @@ increment('not a number');`,
       }),
       tsFacet.of({ worker, path }),
       tsSync(),
-      tsLinterWorker(),
+      tsLinter(),
       autocompletion({
         override: [
           tsAutocomplete({
