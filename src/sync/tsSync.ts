@@ -1,11 +1,26 @@
-import { EditorView } from "@codemirror/view";
+import { EditorView, type ViewUpdate } from "@codemirror/view";
 import { tsFacet } from "../index.js";
 import { tsSyncAnnotation } from "./annotation.js";
 
 /**
+ * Configuration for the tsSync extension
+ */
+interface TsSyncConfig {
+  /**
+   * Given an update object decide whether to take it (true)
+   * or to skip updating TypeScript with this.
+   */
+  filterUpdate: (update: ViewUpdate) => boolean;
+}
+
+/**
  * Sync updates from CodeMirror to the worker.
  */
-export function tsSync() {
+export function tsSync(
+  { filterUpdate = () => true }: TsSyncConfig = {
+    filterUpdate: () => true,
+  },
+) {
   // TODO: this is a weak solution to the cold start problem.
   // If you boot up a CodeMirror instance, we want the initial
   // value to get loaded into CodeMirror. We do get a change event,
@@ -17,6 +32,7 @@ export function tsSync() {
     const config = update.view.state.facet(tsFacet);
     if (!config?.worker) return;
     if (!update.docChanged && !first) return;
+    if (!filterUpdate(update)) return;
     first = false;
 
     config.worker
