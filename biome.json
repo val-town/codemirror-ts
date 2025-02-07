@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": ["demo", "dist", "coverage", "scripts", "test"]
+    "ignore": ["dist", "coverage", "scripts", "test"]
   },
   "formatter": {
     "enabled": true,

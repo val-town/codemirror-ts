@@ -33,11 +33,6 @@ have direct dependencies to:
 
 ## Setup
 
-Below are recipes for setting up this code - check out the StackBlitz
-demos above if you want easily copy-paste-able code!
-
-## Setup
-
 Using a [Worker](https://developer.mozilla.org/en-US/docs/Web/API/Worker), you can
 run TypeScript separately from the rest of your JavaScript, which can make
 both faster and more reliable. Depending on how you're building applications,
@@ -67,7 +62,7 @@ Comlink.expose(
   createWorker(async function () {
     const fsMap = await createDefaultMapFromCDN(
       { target: ts.ScriptTarget.ES2022 },
-      "3.7.3",
+      "5.7.3",
       false,
       ts,
     );
@@ -122,6 +117,61 @@ that accept the `worker` instead of `env` as an argument.
   tsTwoslash(),
 ];
 ```
+
+## Using ATA
+
+The example above will give you a working TypeScript setup, but if you
+import a module from NPM, that module will not have types. Usually TypeScript
+expects you to be installing modules with npm and expects that they'll be stored
+in a `node_modules` directory. `codemirror-ts` is on the internet in a WebWorker,
+so obviously it is not running NPM.
+
+You can emulate what you'd get in a local editor by using [ATA](https://www.npmjs.com/package/@typescript/ata), or
+'automatic type acquisition'. The setup looks like this example,
+and is a change to your WebWorker setup. We use the `onFileUpdated`
+callback passed to `createWorker`, trigger ATA to get new types,
+and then create those files on path.
+
+```ts
+// … import createWorker etc.
+// Import setupTypeAcquisition from @typescript/ata
+
+const worker = createWorker({
+  env: (async () => {
+    const fsMap = await createDefaultMapFromCDN(
+      { target: ts.ScriptTarget.ES2022 },
+      ts.version,
+      false,
+      ts,
+    );
+    const system = createSystem(fsMap);
+    return createVirtualTypeScriptEnvironment(system, [], ts, {
+      lib: ["ES2022"],
+    });
+  })(),
+  onFileUpdated(_env, _path, code) {
+    ata(code);
+  },
+});
+
+const ata = setupTypeAcquisition({
+  projectName: "My ATA Project",
+  typescript: ts,
+  logger: console,
+  delegate: {
+    receivedFile: (code: string, path: string) => {
+      worker.getEnv().createFile(path, code);
+    },
+  },
+});
+
+Comlink.expose(worker);
+```
+
+> [!NOTE]
+> If you are targeting a _non-Node_ environment, like Deno or
+> a web browser, ATA will not help you with your HTTP imports or prefixed
+> imports. It narrowly targets the Node & NPM way of doing imports.
 
 ## Conceptual notes: persisted code
 

@@ -1,4 +1,4 @@
-import { type Diagnostic, linter, type LintSource } from "@codemirror/lint";
+import { type Diagnostic, type LintSource, linter } from "@codemirror/lint";
 import { tsFacet } from "../index.js";
 
 /**

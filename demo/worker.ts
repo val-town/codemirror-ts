@@ -3,13 +3,13 @@ import {
   createSystem,
   createVirtualTypeScriptEnvironment,
 } from "@typescript/vfs";
-import ts from "typescript";
 import * as Comlink from "comlink";
+import ts from "typescript";
 import { createWorker } from "../src/worker/createWorker.js";
 
 Comlink.expose(
   createWorker({
-    env: (async function () {
+    env: (async () => {
       const fsMap = await createDefaultMapFromCDN(
         { target: ts.ScriptTarget.ES2022 },
         ts.version,

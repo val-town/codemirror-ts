@@ -49,6 +49,9 @@ export function createWorker(_options: Promisable<InitializerOptions>) {
         initialized = true;
       }
     },
+    /**
+     * Usually used to hook into ATA
+     */
     updateFile({ path, code }: { path: string; code: string }) {
       if (!env) return;
       if (createOrUpdateFile(env, path, code)) {
