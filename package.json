@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@valtown/codemirror-ts",
-  "version": "3.0.0-12",
+  "version": "3.0.0-13",
   "description": "codemirror extensions for typescript",
   "sideEffects": false,
   "repository": {
