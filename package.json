@@ -18,11 +18,7 @@
     "test:watch": "vitest",
     "build": "vite build"
   },
-  "keywords": [
-    "codemirror",
-    "typescript",
-    "ts"
-  ],
+  "keywords": ["codemirror", "typescript", "ts"],
   "author": "Val Town",
   "license": "ISC",
   "peerDependencies": {
@@ -35,6 +31,7 @@
     "@biomejs/biome": "^1.9.4",
     "@codemirror/lang-javascript": "^6.2.2",
     "@types/node": "^22.13.1",
+    "@typescript/ata": "^0.9.7",
     "@typescript/vfs": "^1.6.1",
     "@vitest/coverage-v8": "^2.1.9",
     "codemirror": "^6.0.1",
@@ -44,9 +41,7 @@
     "vite": "^6.1.0",
     "vitest": "^2.1.9"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "exports": {
     "./package.json": "./package.json",
     ".": {
