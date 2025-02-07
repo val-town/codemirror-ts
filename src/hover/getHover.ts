@@ -22,14 +22,15 @@ export function getHover({
   pos: number;
 }): HoverInfo | null {
   const sourcePos = pos;
-  if (sourcePos === null) return null;
 
   try {
     const quickInfo = env.languageService.getQuickInfoAtPosition(
       path,
       sourcePos,
     );
-    if (!quickInfo) return null;
+    if (!quickInfo) {
+      return null;
+    }
 
     const start = quickInfo.textSpan.start;
 

@@ -16,9 +16,13 @@ export function createOrUpdateFile(
   if (existing) {
     if (code === existing.getFullText()) return false;
     env.updateFile(path, code);
+    // This should make initial linting etc faster by making
+    // TypeScript eagerly create the source file object
+    env.getSourceFile(path);
     return true;
   }
 
   env.createFile(path, code);
+  env.getSourceFile(path);
   return true;
 }

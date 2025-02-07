@@ -32,9 +32,13 @@ export function tsSync(
     const config = update.view.state.facet(tsFacet);
     if (!config?.worker) return;
     if (!update.docChanged && !first) return;
-    if (!filterUpdate(update)) return;
+    if (!filterUpdate(update)) {
+      config.log?.("tsSync: update rejected by filterUpdate", { update });
+      return;
+    }
     first = false;
 
+    config.log?.("tsSync: updating file", { path: config.path });
     config.worker
       .updateFile({
         path: config.path,

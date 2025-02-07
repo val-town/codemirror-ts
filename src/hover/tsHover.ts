@@ -20,7 +20,10 @@ export function tsHover({
       pos,
     });
 
-    if (!hoverData) return null;
+    if (!hoverData) {
+      config.log?.("tsHover: no hover data found at location", { pos });
+      return null;
+    }
 
     return {
       pos: hoverData.start,

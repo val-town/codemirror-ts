@@ -63,6 +63,7 @@ export function tsGoto(
           pos,
         })
         .then((hoverData) => {
+          config.log?.("tsGoto: going to location", { hoverData });
           // In reality, we enforced that opts.gotoHandler
           // is non-nullable earlier, but TypeScript knows
           // that in this callback, that theoretically could

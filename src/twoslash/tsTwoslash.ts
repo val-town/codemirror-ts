@@ -113,6 +113,7 @@ function twoslashes(view: EditorView, config: FacetConfig) {
     });
   }
   Promise.all(promises).then((states) => {
+    config.log?.("tsTwoslash: got data", { states });
     view.dispatch({
       effects: setTwoSlashes.of(states.filter((x) => x !== null)),
     });
