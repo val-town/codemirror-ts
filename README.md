@@ -173,6 +173,32 @@ Comlink.expose(worker);
 > a web browser, ATA will not help you with your HTTP imports or prefixed
 > imports. It narrowly targets the Node & NPM way of doing imports.
 
+## Calling other methods in the worker
+
+The provided `createWorker` method creates a standard object with methods
+that the frontend code knows about and can call to power TypeScript support.
+If you want to do something else with Worker, like transpiling or
+running a code formatter, you can nest the result of createWorker. See
+[the demo for an example](https://val-town.github.io/codemirror-ts/):
+the gist is:
+
+In your worker, nest the `worker` instead of directly exposing it.
+
+```ts
+Comlink.expose({
+  worker,
+  anotherMethod() {
+    return 'another-result';
+  }
+})
+```
+
+In the front-end, reach in for the exposed worker:
+
+```ts
+tsFacet.of({ worker: worker.worker, path }),
+```
+
 ## Conceptual notes: persisted code
 
 There are a few different approaches to building CodeMirror + TypeScript

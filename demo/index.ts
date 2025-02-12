@@ -1,10 +1,5 @@
 import { autocompletion } from "@codemirror/autocomplete";
 import { javascript } from "@codemirror/lang-javascript";
-import {
-  createDefaultMapFromCDN,
-  createSystem,
-  createVirtualTypeScriptEnvironment,
-} from "@typescript/vfs";
 import { EditorView, basicSetup } from "codemirror";
 import * as Comlink from "comlink";
 import type ts from "typescript";
@@ -18,6 +13,7 @@ import {
   tsTwoslash,
 } from "../src/index.js";
 import type { WorkerShape } from "../src/worker.js";
+import type { Exposed } from "./worker_extra_function.js";
 
 function renderDisplayParts(dp: ts.SymbolDisplayPart[]) {
   const div = document.createElement("div");
@@ -141,5 +137,49 @@ const minimumValue = min([1, 2, 3]);`,
       tsTwoslash(),
     ],
     parent: document.querySelector("#editor-worker-ata")!,
+  });
+})().catch((e) => console.error(e));
+
+(async () => {
+  const path = "index.ts";
+
+  // TODO: this is the one place where we can't use .js urls
+  const innerWorker = new Worker(
+    new URL("./worker_extra_function.ts", import.meta.url),
+    {
+      type: "module",
+    },
+  );
+  const w = Comlink.wrap(innerWorker) as Exposed;
+  const worker = w.worker as unknown as WorkerShape;
+  await worker.initialize();
+
+  const editor = new EditorView({
+    doc: `enum X { Y = 'Y' };
+console.log(X.Y);`,
+    extensions: [
+      basicSetup,
+      javascript({
+        typescript: true,
+        jsx: true,
+      }),
+      tsFacet.of({ worker, path }),
+      tsSync(),
+      tsLinter(),
+      autocompletion({
+        override: [tsAutocomplete()],
+      }),
+      tsHover(),
+      tsGoto(),
+      tsTwoslash(),
+      EditorView.updateListener.of((_update) => {
+        w.getTranspiledFile(path).then((code) => {
+          (document.querySelector(
+            "#editor-worker-extra-output",
+          ) as HTMLPreElement)!.innerText = code.outputText;
+        });
+      }),
+    ],
+    parent: document.querySelector("#editor-worker-extra")!,
   });
 })().catch((e) => console.error(e));
