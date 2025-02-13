@@ -6,9 +6,9 @@
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/val-town/val.town"
+    "url": "https://github.com/val-town/codemirror-ts"
   },
-  "homepage": "https://github.com/val-town/val.town",
+  "homepage": "https://github.com/val-town/codemirror-ts",
   "scripts": {
     "prepare": "tsc",
     "dev": "vite",
