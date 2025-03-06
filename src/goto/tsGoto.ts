@@ -1,5 +1,6 @@
 import { EditorView } from "@codemirror/view";
-import { type HoverInfo, tsFacet } from "../index.js";
+import type { HoverInfo } from "../hover/getHover.js";
+import { tsFacet } from "../facet/tsFacet.js";
 
 /**
  * The default setting for the goto handler: this will

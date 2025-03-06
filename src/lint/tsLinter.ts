@@ -1,5 +1,5 @@
 import { type Diagnostic, type LintSource, linter } from "@codemirror/lint";
-import { tsFacet } from "../index.js";
+import { tsFacet } from "../facet/tsFacet.js";
 
 /**
  * The underlying LintSource implementation, if you

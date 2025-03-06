@@ -1,5 +1,5 @@
 import { EditorView, type ViewUpdate } from "@codemirror/view";
-import { tsFacet } from "../index.js";
+import { tsFacet } from "../facet/tsFacet.js";
 import { tsSyncAnnotation } from "./annotation.js";
 
 /**

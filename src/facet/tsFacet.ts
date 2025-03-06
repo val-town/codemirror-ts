@@ -1,5 +1,5 @@
 import { Facet, combineConfig } from "@codemirror/state";
-import type { WorkerShape } from "../worker.js";
+import type { WorkerShape } from "../worker/createWorker.js";
 
 /**
  * Use this facet if you intend to run your TypeScript
