@@ -18,7 +18,11 @@
     "test:watch": "vitest",
     "build": "vite build"
   },
-  "keywords": ["codemirror", "typescript", "ts"],
+  "keywords": [
+    "codemirror",
+    "typescript",
+    "ts"
+  ],
   "author": "Val Town",
   "license": "ISC",
   "peerDependencies": {
@@ -41,7 +45,9 @@
     "vite": "^6.1.0",
     "vitest": "^2.1.9"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     "./package.json": "./package.json",
     ".": {
@@ -65,5 +71,11 @@
   "module": "./dist/index.js",
   "dependencies": {
     "@codemirror/language": "^6.10.8"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@biomejs/biome",
+      "esbuild"
+    ]
   }
 }
