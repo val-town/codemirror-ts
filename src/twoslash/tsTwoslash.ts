@@ -9,7 +9,7 @@ import {
 } from "@codemirror/view";
 import { WidgetType } from "@codemirror/view";
 import type ts from "typescript";
-import { type FacetConfig, tsFacet } from "../index.js";
+import { type FacetConfig, tsFacet } from "../facet/tsFacet.js";
 import { tsSyncAnnotation } from "../sync/annotation.js";
 
 type SetTwoSlashes = {

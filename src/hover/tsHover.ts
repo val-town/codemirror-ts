@@ -1,5 +1,5 @@
 import { type Tooltip, hoverTooltip } from "@codemirror/view";
-import { tsFacet } from "../index.js";
+import { tsFacet } from "../facet/tsFacet.js";
 import { type TooltipRenderer, defaultRenderer } from "./renderTooltip.js";
 
 /**

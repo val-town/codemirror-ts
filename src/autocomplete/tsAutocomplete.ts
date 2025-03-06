@@ -3,7 +3,7 @@ import type {
   CompletionResult,
   CompletionSource,
 } from "@codemirror/autocomplete";
-import { tsFacet } from "../index.js";
+import { tsFacet } from "../facet/tsFacet.js";
 import { deserializeCompletions } from "./deserializeCompletions.js";
 import type { AutocompleteOptions } from "./types.js";
 
