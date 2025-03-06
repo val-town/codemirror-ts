@@ -26,6 +26,6 @@ export const tsFacet = Facet.define<
 
 export type FacetConfig = {
   path: string;
-  worker: WorkerShape;
+  worker: Omit<WorkerShape, "initialize">;
   log?: (...args: unknown[]) => void;
 } | null;
