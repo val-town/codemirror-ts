@@ -106,7 +106,7 @@ that accept the `worker` instead of `env` as an argument.
 
 ```ts
 [
-  tsFacet.of({ worker, path }),
+  tsFacetWorker.of({ worker, path }),
   tsSync(),
   tsLinter(),
   autocompletion({
