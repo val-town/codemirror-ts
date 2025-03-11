@@ -14,7 +14,7 @@ import type { WorkerShape } from "../worker/createWorker.js";
 export const tsFacet = Facet.define<
   {
     path: string;
-    worker: WorkerShape;
+    worker: Omit<WorkerShape, "initialize">;
     log?: (...args: unknown[]) => void;
   },
   FacetConfig
@@ -26,6 +26,6 @@ export const tsFacet = Facet.define<
 
 export type FacetConfig = {
   path: string;
-  worker: WorkerShape;
+  worker: Omit<WorkerShape, "initialize">;
   log?: (...args: unknown[]) => void;
 } | null;
