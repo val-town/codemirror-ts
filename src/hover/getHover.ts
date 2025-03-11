@@ -8,7 +8,10 @@ import type ts from "typescript";
 export interface HoverInfo {
   start: number;
   end: number;
+  /** Type definitions returned by ts.LanguageService.getTypeDefinitionAtPosition() */
   typeDef: readonly ts.DefinitionInfo[] | undefined;
+  /** Definitions returned by ts.LanguageService.getDefinitionAtPosition() */
+  def: readonly ts.DefinitionInfo[] | undefined;
   quickInfo: ts.QuickInfo | undefined;
 }
 
@@ -35,13 +38,15 @@ export function getHover({
     const start = quickInfo.textSpan.start;
 
     const typeDef =
-      env.languageService.getTypeDefinitionAtPosition(path, sourcePos) ??
+      env.languageService.getTypeDefinitionAtPosition(path, sourcePos);
+    const def =
       env.languageService.getDefinitionAtPosition(path, sourcePos);
 
     return {
       start,
       end: start + quickInfo.textSpan.length,
       typeDef,
+      def,
       quickInfo,
     };
   } catch (e) {
