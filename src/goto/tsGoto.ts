@@ -13,7 +13,10 @@ export function defaultGotoHandler(
   hoverData: HoverInfo,
   view: EditorView,
 ) {
-  const definition = hoverData?.typeDef?.at(0);
+  const definition = [
+    ...(hoverData.typeDef ? hoverData.typeDef : []),
+    ...(hoverData.def ? hoverData.def : [])
+  ]?.at(0);
 
   if (definition && currentPath === definition.fileName) {
     const tr = view.state.update({
