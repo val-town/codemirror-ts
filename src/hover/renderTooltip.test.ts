@@ -13,6 +13,7 @@ test("defaultRenderer", () => {
         start: 0,
         end: 1,
         typeDef: undefined,
+        def: undefined,
         quickInfo: undefined,
       },
       view,
