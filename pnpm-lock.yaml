@@ -35,10 +35,10 @@ importers:
         version: 22.13.1
       '@typescript/ata':
         specifier: ^0.9.7
-        version: 0.9.7(typescript@5.7.3)
+        version: 0.9.7(typescript@5.8.3)
       '@typescript/vfs':
         specifier: ^1.6.1
-        version: 1.6.1(typescript@5.7.3)
+        version: 1.6.1(typescript@5.8.3)
       '@vitest/coverage-v8':
         specifier: ^2.1.9
         version: 2.1.9(vitest@2.1.9(@types/node@22.13.1)(happy-dom@15.11.7))
@@ -53,7 +53,7 @@ importers:
         version: 15.11.7
       typescript:
         specifier: ^5.7.3
-        version: 5.7.3
+        version: 5.8.3
       vite:
         specifier: ^6.1.0
         version: 6.3.5(@types/node@22.13.1)
@@ -958,8 +958,8 @@ packages:
     resolution: {integrity: sha512-n1cw8k1k0x4pgA2+9XrOkFydTerNcJ1zWCO5Nn9scWHTD+5tp8dghT2x1uduQePZTZgd3Tupf+x9BxJjeJi77Q==}
     engines: {node: '>=14.0.0'}
 
-  typescript@5.7.3:
-    resolution: {integrity: sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==}
+  typescript@5.8.3:
+    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -1467,14 +1467,14 @@ snapshots:
     dependencies:
       undici-types: 6.20.0
 
-  '@typescript/ata@0.9.7(typescript@5.7.3)':
+  '@typescript/ata@0.9.7(typescript@5.8.3)':
     dependencies:
-      typescript: 5.7.3
+      typescript: 5.8.3
 
-  '@typescript/vfs@1.6.1(typescript@5.7.3)':
+  '@typescript/vfs@1.6.1(typescript@5.8.3)':
     dependencies:
       debug: 4.4.0
-      typescript: 5.7.3
+      typescript: 5.8.3
     transitivePeerDependencies:
       - supports-color
 
@@ -1872,7 +1872,7 @@ snapshots:
 
   tinyspy@3.0.2: {}
 
-  typescript@5.7.3: {}
+  typescript@5.8.3: {}
 
   undici-types@6.20.0: {}
 
