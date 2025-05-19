@@ -40,7 +40,7 @@
     "@vitest/coverage-v8": "^2.1.9",
     "codemirror": "^6.0.1",
     "comlink": "^4.4.2",
-    "happy-dom": "^15.11.7",
+    "happy-dom": "^17.4.7",
     "typescript": "^5.7.3",
     "vite": "^6.1.0",
     "vitest": "^2.1.9"
