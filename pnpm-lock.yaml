@@ -35,7 +35,7 @@ importers:
         version: 22.15.20
       '@typescript/ata':
         specifier: ^0.9.7
-        version: 0.9.7(typescript@5.8.3)
+        version: 0.9.8(typescript@5.8.3)
       '@typescript/vfs':
         specifier: ^1.6.1
         version: 1.6.1(typescript@5.8.3)
@@ -612,8 +612,8 @@ packages:
   '@types/node@22.15.20':
     resolution: {integrity: sha512-A6BohGFRGHAscJsTslDCA9JG7qSJr/DWUvrvY8yi9IgnGtMxCyat7vvQ//MFa0DnLsyuS3wYTpLdw4Hf+Q5JXw==}
 
-  '@typescript/ata@0.9.7':
-    resolution: {integrity: sha512-CZx57/XGBKhYZ3ifchbERgUl9J6C7W3XC96ibM7axr7C32mG5dXTyrVAS3ZY88Jxlkvx4AZyZtDJyUuseHQkcQ==}
+  '@typescript/ata@0.9.8':
+    resolution: {integrity: sha512-+M815CeDRJS5H5ciWfhFCKp25nNfF+LFWawWAaBhNlquFb2wS5IIMDI+2bKWN3GuU6mpj+FzySsOD29M4nG8Xg==}
     peerDependencies:
       typescript: '>=4.4.4'
 
@@ -1491,7 +1491,7 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
-  '@typescript/ata@0.9.7(typescript@5.8.3)':
+  '@typescript/ata@0.9.8(typescript@5.8.3)':
     dependencies:
       typescript: 5.8.3
 
