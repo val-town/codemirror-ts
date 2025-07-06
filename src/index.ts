@@ -1,4 +1,5 @@
 export * from "./sync/tsSync.js";
+export * from "./sync/annotation.js";
 
 export * from "./autocomplete/tsAutocomplete.js";
 export * from "./autocomplete/getAutocompletion.js";
