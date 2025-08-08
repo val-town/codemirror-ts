@@ -35,10 +35,10 @@ importers:
         version: 24.0.8
       '@typescript/ata':
         specifier: ^0.9.8
-        version: 0.9.8(typescript@5.8.3)
+        version: 0.9.8(typescript@5.9.2)
       '@typescript/vfs':
         specifier: ^1.6.1
-        version: 1.6.1(typescript@5.8.3)
+        version: 1.6.1(typescript@5.9.2)
       '@vitest/coverage-v8':
         specifier: ^3.1.4
         version: 3.2.4(vitest@3.2.4(@types/node@24.0.8)(happy-dom@18.0.1))
@@ -53,7 +53,7 @@ importers:
         version: 18.0.1
       typescript:
         specifier: ^5.8.3
-        version: 5.8.3
+        version: 5.9.2
       vite:
         specifier: ^7.0.0
         version: 7.1.1(@types/node@24.0.8)
@@ -849,8 +849,8 @@ packages:
     resolution: {integrity: sha512-t2T/WLB2WRgZ9EpE4jgPJ9w+i66UZfDc8wHh0xrwiRNN+UwH98GIJkTeZqX9rg0i0ptwzqW+uYeIF0T4F8LR7A==}
     engines: {node: '>=14.0.0'}
 
-  typescript@5.8.3:
-    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
+  typescript@5.9.2:
+    resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -1295,14 +1295,14 @@ snapshots:
 
   '@types/whatwg-mimetype@3.0.2': {}
 
-  '@typescript/ata@0.9.8(typescript@5.8.3)':
+  '@typescript/ata@0.9.8(typescript@5.9.2)':
     dependencies:
-      typescript: 5.8.3
+      typescript: 5.9.2
 
-  '@typescript/vfs@1.6.1(typescript@5.8.3)':
+  '@typescript/vfs@1.6.1(typescript@5.9.2)':
     dependencies:
       debug: 4.4.0
-      typescript: 5.8.3
+      typescript: 5.9.2
     transitivePeerDependencies:
       - supports-color
 
@@ -1691,7 +1691,7 @@ snapshots:
 
   tinyspy@4.0.3: {}
 
-  typescript@5.8.3: {}
+  typescript@5.9.2: {}
 
   undici-types@6.21.0: {}
 
