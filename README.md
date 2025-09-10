@@ -1,5 +1,6 @@
-# codemirror-ts
+_Maintenance notice: Val Town now uses [vtlsp](https://github.com/val-town/vtlsp), which [runs the Deno LS and talks to it with the Language Server Protocol](https://blog.val.town/vtlsp). We won't be doing any first-party feature work on this codebase anymore, but are happy to accept pull requests from the community._
 
+# codemirror-ts
 
 <a href="https://www.npmjs.com/package/@valtown/codemirror-ts" rel="nofollow"><img src="https://img.shields.io/npm/dw/@valtown/codemirror-ts.svg" alt="npm"></a>
 
